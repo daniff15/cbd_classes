@@ -1,0 +1,91 @@
+MSET person:2 "Kurt Kobain" person:3 "Jane Austen" person:4 "Mark Zucker"
+MGET person:2
+MGET person:2 person:3
+MGET person:2 person:3 person:4
+MGET person:2 person:3 person:4 person:5
+LPUSH Book:1:comment "This was a fun read"
+LPUSH book:1:comment "This was fun"
+LRANGE book:1:comment 0 -1
+LPUSH book:1:comment "Way too long"
+LRANGE book:1:comment 0 -1
+RPUSH book:1:comment "Tennis anyone?"
+LRANGE book:1:comment 0 -1
+LPOP book:1:comment
+LRANGE book:1:comment 0 -1
+RPOP book:1:comment
+LRANGE book:1:comment 0 -1
+RPUSH organization:1:members person:1 person:2 person:3 person:4
+LRANGE organization:1:members  0 -1
+LTRIM organization:1:members  0 2
+LRANGE organization:1:members  0 -1
+LTRIM organization:1:members  0 1
+LRANGE organization:1:members  0 -1
+BRPOP organization:1:members 5
+LRANGE organization:1:members  0 -1
+HSET book:3 name "Cats Cradle"
+HGET book:3 name
+HGET book:3
+HMSET book:4 name "SlaughterHouse" author "Kurt Vonnegut" copyrightYear 1969 ISBN 29960763
+HMGET Book:4 author ISBN
+HMGET book:4 author ISBN
+HGETALL book:4
+HEXISTS book:4 copyrightYear
+HEXISTS book:4 barcode
+HLEN book:4
+HLEN book:3
+HGET book:3
+HGETALL book:3
+HKEYS book:4
+Hvals book:4
+HDEL book:4 copyrightYear
+HGETALL book:4
+HSET book:4 copyrightYear 1968
+HINCRBY book:4 copyrightYear 1
+HGET book:4 copyrightYear
+SET organization:5
+SET organization:5 "BeatLess"
+SADD organization:5:member Paul Jhon George Ringo
+SMEMBERS organization:5:member
+SISMEMBER organization:5:member "John
+SISMEMBER organization:5:member "John"
+SISMEMBER organization:5:member "Jhon"
+SCARD Organization:5:member
+SCARD organization:5:member
+SET Organization:6 "Wings"
+SET Organization:7 "Traveling"
+SADD organization:6:member Paul Linda Denny
+SADD organization:7:member bob George Jeff Roy
+SUNION organization:5:member organization:6:member
+SUNION organization:5:member Organization:6:member
+SUNION organization:5:member organization:6:member Organization:8
+SINTER organization:5:member organization:6:member
+SINTER organization:5:member organization:7:member
+SINTER organization:6:member organization:7:member
+SDIFF organization:5:member organization:6:member
+SDIFF organization:6:member organization:5:member
+ZADD copyrightYear 1996 book:1 2014 book:2 1963 book:3
+zrange copyrightYear 0 -1
+ZADD copyrightYear 1969 book:4
+zrange copyrightYear 0 -1
+ZRANGE copyrightYear 0 -1 WITHSCORES
+ZREVRANGE copyrightYear 0 -1
+ZREVRANGE copyrightYear 0 -1 WITHSCORES
+ZADD Book:names 0 "Into the Wild" 0 "Cat's Cradle"
+ZADD Book:names0 "Time Machine, The" 0 "Gravity's Rainbow"
+ZADD Book:names 0 "Time Machine, The" 0 "Gravity's Rainbow"
+ZRANGE Book:names 0 -1 WITHSCORES
+ZRANK copyrightYear Book:3
+ZRANK copyrightYear book:3
+ZRANK copyrightYear book:1
+ZSCORE copyrightYear book:3
+ZSCORE copyrightYear book:1
+ZRANGE copyrightYear 0 -1 withscores
+ZCOUNT copyrightYear 1900 1970
+ZRANGEBYSCORE copyrightYear 1900 1970 WITHSCORES
+ZRANGEBYSCORE copyrightYear -inf 2000 WITHSCORES
+ZRANGEBYSCORE copyrightYear 1998 +inf WITHSCORES
+loglevel notice
+DBSIZE
+GET localhost
+CONFIG GET port
+exit

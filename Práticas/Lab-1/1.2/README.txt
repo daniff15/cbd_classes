@@ -1,0 +1,1 @@
+sudo cat filename.txt | redis-cli --pipe
