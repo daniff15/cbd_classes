@@ -20,6 +20,7 @@ public class App {
         Scanner scNames = null;
 
         // Aline a
+        System.out.println("ALINEA A!");
         try {
             scNames = new Scanner(file);
         } catch (FileNotFoundException ex) {
@@ -53,6 +54,7 @@ public class App {
 
         Scanner scCSV = new Scanner(System.in);
 
+        System.out.println("ALINEA B!");
         try {
             FileReader fr = new FileReader("./src/main/java/com/cbd/nomes-pt-2021.csv");
             BufferedReader br = new BufferedReader(fr);

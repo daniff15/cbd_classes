@@ -5,7 +5,7 @@ import redis.clients.jedis.Jedis;
 
 public class SimplePostSet {
     private Jedis jedis;
-    public static String USERS = "names";
+    public static String USERS = "namesSet";
 
     public SimplePostSet() {
         this.jedis = new Jedis("localhost");

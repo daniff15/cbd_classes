@@ -6,7 +6,7 @@ import redis.clients.jedis.Jedis;
 public class PostSetCSV {
     private Jedis jedis;
     
-    public static String USERS = "names";
+    public static String USERS = "namesNumber";
 
     public PostSetCSV() {
         this.jedis = new Jedis("localhost");
