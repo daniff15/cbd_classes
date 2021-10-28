@@ -1,0 +1,6 @@
+If mongo aint working do these 2 commands:
+
+$ sudo rm -rf /tmp/mongodb-27017.sock
+
+$ sudo service mongod start
+

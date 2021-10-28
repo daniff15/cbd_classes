@@ -1,0 +1,1 @@
+$not condition works only in regex, if we want to write a string we need to put it between /string/
