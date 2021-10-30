@@ -39,3 +39,30 @@ db.restaurants.find({$or:[ {localidade: "Staten Island"},{localidade: "Queens"},
 
 //13.Liste o nome, a localidade, o score e gastronomia dos restaurantes que alcançaram sempre pontuações inferiores ou igual a 3.
 db.restaurants.find({"grades.score":{$not: {$gt:3}}}, {restaurant_id:1, nome:1, localidade:1 , gastronomia:1, grades:{score:1} ,_id: 0})
+
+//14.Listeo nomee as avaliações dos restaurantes que obtiveram uma avaliação com um grade"A",um score10na data "2014-08-11T00: 00: 00Z" (ISODATE).
+db.restaurants.find({'grades': {'$elemMatch': {grade: 'A', score: 10, date: ISODate("2014-08-11T00:00:00Z")}}},{'grades.grade': 1, nome: 1})
+
+//15.Listeo restaurant_id, o nomee os scoredos restaurantes nos quais a segunda avaliação foi grade"A"e ocorreu em ISODATE "2014-08-11T00: 00: 00Z".
+db.restaurants.find({$and: [{"grades.1.grade":"A"},{"grades.1.date":new Date("2014-08-11T00:00:00Z")}]},{restaurant_id: 1, nome:1, "grades.score":1})
+
+//16.Listeo restaurant_id, o nome, o endereço(address) e as coordenadas geográficas (coord)dosrestaurantes onde o 2º elemento da matriz de coordenadas temum valor superior a 42 e inferior ou igual a52.
+db.getCollection('restaurants').find({$and: [{'address.coord.1': {$gt:42}},{'address.coord.1': {$lte:52}}]}, {restaurant_id:1 , nome:1 ,address:1 })
+
+//17.Liste nome, gastronomia e localidadede todos osrestaurantesordenando por ordem crescente da gastronomiae, em segundo,por ordem decrescentedelocalidade.
+db.restaurants.find({}, {gastronomia:1 , nome:1 ,localidade:1}).sort({gastronomia:1, localidade:-1})
+
+//18.Liste nome, localidade, gradee gastronomiade todos os restaurantes localizados emBrooklyn que não incluemgastronomia"American" e obtiveramuma classificação (grade) "A". Deve apresentá-los por ordem decrescente de gastronomia.
+db.restaurants.find({localidade:"Brooklyn", gastronomia:{$ne:"American"}}, {"grades.grade":1 , nome:1 ,localidade:1, gastronomia:1}).sort({gastronomia:-1})
+
+//19.Conte o total de restaurante existentes em cada localidade
+db.restaurants.aggregate([{$group:{_id:"$localidade", num:{$sum:1}}}])
+
+//20.Liste todos os restaurantes cuja média dosscore é superior a 30.
+db.restaurants.aggregate([{$addFields: {avg: {$avg: "$grades.score"} }},{$match: {avg: {$gt: 30}}}])
+
+//21.Indique os restaurantes que têm gastronomia "Portuguese", o somatório de score é superior a 50e estão numalatitude inferior a -60.
+db.restaurants.aggregate([{ $project: {gastronomia:"$gastronomia", sum:{$sum:"$grades.score"} ,latitude:{$arrayElemAt:["$address.coord", 0]}}}, {$match:{sum:{$gt:75}, latitude:{$lt:-60}}}])
+
+//22.Apresente o nome e o score dos 3 restaurantes com score médio mais elevado.
+db.restaurants.aggregate([{$project: {"nome": 1, "grades.score": 1}}, {$addFields: {avg: {$avg: "$grades.score"}}},{$sort: {avg: -1}}, {$limit: 3}])
