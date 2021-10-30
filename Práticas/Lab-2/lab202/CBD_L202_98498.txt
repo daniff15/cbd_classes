@@ -11,7 +11,7 @@ db.restaurants.find({}, {restaurant_id:1, nome:1 ,localidade:1,"address.zipcode"
 
 //4.Indique o total de restaurantes localizados no Bronx.
 db.restaurants.find({localidade: "Bronx"}).count()
-Result: 309
+Resultado: 309
 
 //5.Apresente os primeiros 15restaurantes localizados no Bronx, ordenados por ordem crescente de nome.
 db.restaurants.find({localidade: "Bronx"}).sort({nome:1}).limit(15)
@@ -47,7 +47,7 @@ db.restaurants.find({'grades': {'$elemMatch': {grade: 'A', score: 10, date: ISOD
 db.restaurants.find({$and: [{"grades.1.grade":"A"},{"grades.1.date":new Date("2014-08-11T00:00:00Z")}]},{restaurant_id: 1, nome:1, "grades.score":1})
 
 //16.Listeo restaurant_id, o nome, o endereço(address) e as coordenadas geográficas (coord)dosrestaurantes onde o 2º elemento da matriz de coordenadas temum valor superior a 42 e inferior ou igual a52.
-db.getCollection('restaurants').find({$and: [{'address.coord.1': {$gt:42}},{'address.coord.1': {$lte:52}}]}, {restaurant_id:1 , nome:1 ,address:1 })
+db.restaurants.find({$and: [{'address.coord.1': {$gt:42}},{'address.coord.1': {$lte:52}}]}, {restaurant_id:1 , nome:1 ,address:1 })
 
 //17.Liste nome, gastronomia e localidadede todos osrestaurantesordenando por ordem crescente da gastronomiae, em segundo,por ordem decrescentedelocalidade.
 db.restaurants.find({}, {gastronomia:1 , nome:1 ,localidade:1}).sort({gastronomia:1, localidade:-1})
@@ -66,3 +66,27 @@ db.restaurants.aggregate([{ $project: {gastronomia:"$gastronomia", sum:{$sum:"$g
 
 //22.Apresente o nome e o score dos 3 restaurantes com score médio mais elevado.
 db.restaurants.aggregate([{$project: {"nome": 1, "grades.score": 1}}, {$addFields: {avg: {$avg: "$grades.score"}}},{$sort: {avg: -1}}, {$limit: 3}])
+
+//23.Apresente o número de gastronomias diferentes na rua "Fifth Avenue"
+db.restaurants.distinct("gastronomia", {"address.rua":"Fifth Avenue"}).length
+
+//24.Conte quantos restaurantes existem por rua e ordenepor ordem decrescente
+db.restaurants.aggregate([{$group:{_id:"$address.rua", numRest:{$sum:1}}}, {$sort: {"numRest": -1}}])
+
+//25.Listar todos o numero total de restaurantes por localidade
+db.restaurants.aggregate([{$group:{ _id: "$localidade", Total:{$sum: 1}}}, {$sort:{'Total':-1}}])
+
+//26.Listar a gastronomia mais popular
+db.rest.aggregate([{$group:{ _id:"$gastronomia", sum:{$sum:1}}},{$sort:{sum:-1}},{$limit:1}])
+
+//27Localidade com mais restaurantes
+db.restaurants.aggregate([{$group:{ _id: "$localidade", Total:{$sum: 1}}}, {$sort:{'Total':-1}}, {$limit: 1}])
+
+//28.Restaurantes em Staten Island que têm gastronomia "American" e ordenados ascendentemente pelo nome do restaurante
+db.restaurants.find({$and:[{gastronomia:"American"},{localidade:"Staten Island"},]},{nome:1,localidade:1,gastronomia:1}).sort({nome:1})
+
+//29.Indicar quantos restaurantes têm localidade "Queens" e gastronomia "Delicatessen"
+db.restaurants.find({$and:[{gastronomia:"Delicatessen"},{localidade:"Queens"}]}).count()
+
+//30.Listar os restaurantes que tem gastronomia "American" mas que não se situam em Brooklyn nem em Staten Island
+db.restaurants.find({gastronomia:"American", $nor: [{localidade:"Brooklyn"}, { localidade:"Staten Island" } ] })
