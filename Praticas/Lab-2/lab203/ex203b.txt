@@ -1,0 +1,3 @@
+Using function:
+
+db.phones.find().count() - 200000 phone numbers
