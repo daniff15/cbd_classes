@@ -85,8 +85,5 @@ db.restaurants.aggregate([{$group:{ _id: "$localidade", Total:{$sum: 1}}}, {$sor
 //28.Restaurantes em Staten Island que têm gastronomia "American" e ordenados ascendentemente pelo nome do restaurante
 db.restaurants.find({$and:[{gastronomia:"American"},{localidade:"Staten Island"},]},{nome:1,localidade:1,gastronomia:1}).sort({nome:1})
 
-//29.Indicar quantos restaurantes têm localidade "Queens" e gastronomia "Delicatessen"
-db.restaurants.find({$and:[{gastronomia:"Delicatessen"},{localidade:"Queens"}]}).count()
-
-//30.Listar os restaurantes que tem gastronomia "American" mas que não se situam em Brooklyn nem em Staten Island
+//29.Listar os restaurantes que tem gastronomia "American" mas que não se situam em Brooklyn nem em Staten Island
 db.restaurants.find({gastronomia:"American", $nor: [{localidade:"Brooklyn"}, { localidade:"Staten Island" } ] })
