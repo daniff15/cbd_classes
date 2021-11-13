@@ -1,0 +1,187 @@
+{
+    "firstName": "Rack",
+    "lastName": "Jackon",
+    "gender": "man",
+    "age": 24,
+    "address": {
+        "streetAddress": "126",
+        "city": "San Jone",
+        "postalCode": "394221"
+    }
+}
+{
+    "firstName": "Dani",
+    "lastName": "Figueiredo",
+    "gender": "man",
+    "age": 20,
+    "address": {
+        "streetAddress": "Avenida Dessarges",
+        "city": "Pesqueira",
+        "postalCode": "5130-355"
+    }
+}
+{
+    "firstName": "Pedro",
+    "lastName": "Sobral",
+    "gender": "man",
+    "age": 20,
+    "address": {
+        "streetAddress": "Rua Nova Velha",
+        "city": "Trevões",
+        "postalCode": "5135-111"
+    }
+}
+{
+    "firstName": "Filipe",
+    "lastName": "Freixo",
+    "gender": "man",
+    "age": 20,
+    "address": {
+        "streetAddress": "Avenida Dessarges",
+        "city": "Pesqueira",
+        "postalCode": "5130-300"
+    }
+}
+{
+    "firstName": "André",
+    "lastName": "Freixo",
+    "gender": "man",
+    "age": 20,
+    "address": {
+        "streetAddress": "Avenida Dessarges",
+        "city": "Pesqueira",
+        "postalCode": "5130-300"
+    }
+}
+{
+    "firstName": "Eva",
+    "lastName": "Bartolomeu",
+    "gender": "woman",
+    "age": 20,
+    "address": {
+        "streetAddress": "Rua de Valonguenses",
+        "city": "Valongo",
+        "postalCode": "5140-213"
+    }
+}
+{
+    "firstName": "Luis",
+    "lastName": "Maria",
+    "gender": "man",
+    "age": 24,
+    "address": {
+        "streetAddress": "Rua Linda",
+        "city": "Setúbal",
+        "postalCode": "5400-111"
+    }
+}
+{
+    "firstName": "Antonieta",
+    "lastName": "Josué",
+    "gender": "woman",
+    "age": 30,
+    "address": {
+        "streetAddress": "Rua Comuna",
+        "city": "Matosinhos",
+        "postalCode": "5111-54"
+    }
+}
+{
+    "firstName": "Lisboa",
+    "lastName": "Lismau",
+    "gender": "woman",
+    "age": 24,
+    "address": {
+        "streetAddress": "Rua lisboeta",
+        "city": "Lisboa",
+        "postalCode": "2300-444"
+    }
+}
+{
+    "firstName": "Paulo",
+    "lastName": "Cruz",
+    "gender": "man",
+    "age": 50,
+    "address": {
+        "streetAddress": "Rua Idoso Novo",
+        "city": "Vilamoura",
+        "postalCode": "5122-555"
+    }
+}
+{
+    "firstName": "João",
+    "lastName": "Azeiteiro",
+    "gender": "man",
+    "age": 65,
+    "address": {
+        "streetAddress": "Rua Jovem velho",
+        "city": "Vilamoura",
+        "postalCode": "5122-355"
+    }
+}
+{
+    "firstName": "José",
+    "lastName": "Maria",
+    "gender": "man",
+    "age": 90,
+    "address": {
+        "streetAddress": "Rua do Castro",
+        "city": "Lisboa",
+        "postalCode": "2300-555"
+    }
+}
+{
+    "firstName": "Élia",
+    "lastName": "Nova",
+    "gender": "woman",
+    "age": 40,
+    "address": {
+        "streetAddress": "Rua do L",
+        "city": "Viana",
+        "postalCode": "3330-123"
+    }
+}
+{
+    "firstName": "Oliver",
+    "lastName": "Jackon",
+    "gender": "man",
+    "age": 30,
+    "address": {
+        "streetAddress": "Rua Linda",
+        "city": "Braga",
+        "postalCode": "4400-321"
+    }
+}
+{
+    "firstName": "Raquel",
+    "lastName": "Luis",
+    "gender": "woman",
+    "age": 60,
+    "address": {
+        "streetAddress": "Rua Linda",
+        "city": "Braga",
+        "postalCode": "4400-231"
+    }
+}
+{
+    "firstName": "António",
+    "lastName": "Silva",
+    "gender": "man",
+    "age": 15,
+    "address": {
+        "streetAddress": "Rua Jovem",
+        "city": "Marina D'or",
+        "postalCode": "5451-555"
+    }
+}
+{
+    "firstName": "Joacine",
+    "lastName": "Madureira",
+    "gender": "woman",
+    "age": 44,
+    "address": {
+        "streetAddress": "Rua Nova",
+        "city": "Viana",
+        "postalCode": "3330-444"
+    }
+}

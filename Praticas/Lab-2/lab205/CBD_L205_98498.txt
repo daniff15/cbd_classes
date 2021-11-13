@@ -1,0 +1,14 @@
+// 1 - Pessoas que têm mais de 50 anos
+
+// 2 - Mulheres
+db.pessoas.find({gender: "woman"})
+
+// 3 - Pessoas em que o último nome não começa por "F"
+db.pessoas.find({lastName:{$not: { $regex : "F.*"}}})
+
+// 4 - Listar o nome completo das pessoas que têm menos de 20 anos
+
+// 5 - Listar as pessoas que têm idade [60,90]
+
+// 6 - Nome completo das pessoas que vivem na rua "Avenida Dessarges" 
+db.pessoas.find({"address.streetAddress": "Avenida Dessarges"}, {firstName: 1 , lastName: 1})
