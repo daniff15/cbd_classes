@@ -1,4 +1,6 @@
+find({...}, {...})
 // 1 - Pessoas que têm mais de 50 anos
+db.pessoas.find({ age : {$gt : 50}})
 
 // 2 - Mulheres
 db.pessoas.find({gender: "woman"})
@@ -6,9 +8,30 @@ db.pessoas.find({gender: "woman"})
 // 3 - Pessoas em que o último nome não começa por "F"
 db.pessoas.find({lastName:{$not: { $regex : "F.*"}}})
 
-// 4 - Listar o nome completo das pessoas que têm menos de 20 anos
+// 4 - Listar a idade e o nome completo das pessoas que têm menos de 20 anos
+db.pessoas.find({ age : {$lt : 20}} , {firstName : 1, lastName:1, age: 1})
 
 // 5 - Listar as pessoas que têm idade [60,90]
+db.pessoas.find({$and : [{ age : {$gte : 60}} , {age : {$lte : 90}}]})
 
 // 6 - Nome completo das pessoas que vivem na rua "Avenida Dessarges" 
 db.pessoas.find({"address.streetAddress": "Avenida Dessarges"}, {firstName: 1 , lastName: 1})
+
+aggregate($group, $project, $unwind, $match, etc)
+// 1 - Listar o numero de pessoas por localidade
+db.pessoas.aggregate([{$group:{ _id: "$address.city", Total:{$sum: 1}}}])
+
+// 2 - Apelido mais utilizado
+db.pessoas.aggregate([{$group:{ _id:"$lastName", sum:{$sum:1}}},{$sort:{sum:-1}},{$limit:1}])
+
+// 3 - Listar o nome completo de todas as pessoas
+db.pessoas.aggregate([{$project: {"firstName": 1, "lastName": 1}}])   
+
+// 4 - Ordenar as pessoas pelo seu ultimo nome de forma decrescente
+db.pessoas.aggregate([{$project: {"lastName": 1}}, {$sort : {"lastName" : -1}}])
+
+// 5 - Média de idades
+db.pessoas.aggregate([{$group : {_id : "$item", avgAge: {$avg: "$age"}}}])
+
+// 6 - Média de idades por cidade ordenada por ordem decrescente
+db.pessoas.aggregate([{$group : {_id : "$address.city", avgAge: {$avg: "$age"}}} , {$sort : {avgAge : -1}}])
