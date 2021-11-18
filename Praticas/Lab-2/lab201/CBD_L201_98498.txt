@@ -1,0 +1,548 @@
+> use test_db
+switched to db test_db
+> db
+test_db
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db.movie.insert({"name":"tutorials point"})
+WriteResult({ "nInserted" : 1 })
+> show dbs
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+test_db  0.000GB
+> db.dropDatabase()´
+uncaught exception: SyntaxError: illegal character :
+@(shell):1:17
+> db.dropDatabase()
+{ "dropped" : "test_db", "ok" : 1 }
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use test
+switched to db test
+> db.createCollection("testColl")
+{ "ok" : 1 }
+> show collections
+testColl
+> db.createCollection("mycol", { capped : true, autoIndexID : true, size : 6142800, max : 10000 } ){
+... "ok" : 0,
+... "errmsg" : "BSON field 'create.autoIndexID' is an unknown field.",
+... "code" : 40415,
+... "codeName" : "Location40415"
+... }
+uncaught exception: SyntaxError: unexpected token: '{' :
+@(shell):1:97
+> db.createCollection("mycol", { capped : true, autoIndexID : true, size : 6142800, max : 10000 } )
+{
+	"ok" : 0,
+	"errmsg" : "BSON field 'create.autoIndexID' is an unknown field.",
+	"code" : 40415,
+	"codeName" : "Location40415"
+}
+> db.tutorialspoint.insert({"name" : "tutorialspoint"})
+WriteResult({ "nInserted" : 1 })
+> show collections
+testColl
+tutorialspoint
+> show collections
+testColl
+tutorialspoint
+> db.testColl.drop()
+true
+> show collections
+tutorialspoint
+> db.test.insert({_id : ObjectId("507f191e810c19729de860ea"),title: "MongoDB Overview",description: "MongoDB is no sql database",by: "tutorials point",url: "http://www.tutorialspoint.com",tags: ['mongodb', 'database', 'NoSQL'],likes: 100}(
+... )
+...
+...
+> db.test.insert({_id : ObjectId("507f191e810c19729de860ea"),title: "MongoDB Overview",description: "MongoDB is no sql database",by: "tutorials point",url: "http://www.tutorialspoint.com",tags: ['mongodb', 'database', 'NoSQL'],likes: 100})
+WriteResult({ "nInserted" : 1 })
+> show collections
+test
+tutorialspoint
+> db.post.insert([
+...     {
+...         title: "MongoDB Overview",
+...         description: "MongoDB is no SQL database",
+...         by: "tutorials point",
+...         url: "http://www.tutorialspoint.com",
+...         tags: ["mongodb", "database", "NoSQL"],
+...         likes: 100
+...     },
+...     {
+...     title: "NoSQL Database",
+...     description: "NoSQL database doesn't have tables",
+...     by: "tutorials point",
+...     url: "http://www.tutorialspoint.com",
+...     tags: ["mongodb", "database", "NoSQL"],
+...     likes: 20,
+...     comments: [
+...         {
+...             user:"user1",
+...             message: "My first comment",
+...             dateCreated: new Date(2013,11,10,2,35),
+...             like: 0
+...         }
+...     ]
+... }
+... ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.empDetails.insertOne(
+...     {
+...         First_Name: "Radhika",
+...         Last_Name: "Sharma",
+...         Date_Of_Birth: "1995-09-26",
+...         e_mail: "radhika_sharma.123@gmail.com",
+...         phone: "9848022338"
+...     })
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("5f980e3d30ab4091bfc7b88d")
+}
+> db.empDetails.insertMany(
+...     [
+...         {
+...             First_Name: "Radhika",
+...             Last_Name: "Sharma",
+...             Date_Of_Birth: "1995-09-26",
+...             e_mail: "radhika_sharma.123@gmail.com",
+...             phone: "9000012345"
+...         },
+...         {
+...             First_Name: "Rachel",
+...             Last_Name: "Christopher",
+...             Date_Of_Birth: "1990-02-16",
+...             e_mail: "Rachel_Christopher.123@gmail.com",
+...             phone: "9000054321"
+...         },
+...         {
+...             First_Name: "Fathima",
+...             Last_Name: "Sheik",
+...             Date_Of_Birth: "1990-02-16",
+...             e_mail: "Fathima_Sheik.123@gmail.com",
+...             phone: "9000054321"
+...         }
+...     ]
+... )
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("5f980e7d30ab4091bfc7b88e"),
+		ObjectId("5f980e7d30ab4091bfc7b88f"),
+		ObjectId("5f980e7d30ab4091bfc7b890")
+	]
+}
+> use sampleDB
+switched to db sampleDB
+> db.createCollection("mycol")
+{ "ok" : 1 }
+> db.mycol.insert([
+...     {
+...         title: "MongoDB Overview",
+...         description: "MongoDB is no SQL database",
+...         by: "tutorials point",
+...         url: "http://www.tutorialspoint.com",
+...         tags: ["mongodb", "database", "NoSQL"],
+...         likes: 100
+...     },
+...     {
+...         title: "NoSQL Database",
+...         description: "NoSQL database doesn't have tables",
+...         by: "tutorials point",
+...         url: "http://www.tutorialspoint.com",
+...         tags: ["mongodb", "database", "NoSQL"],
+...         likes: 20,
+...         comments: [
+...             {
+...                 user:"user1",
+...                 message: "My first comment",
+...                 dateCreated: new Date(2013,11,10,2,35),
+...                 like: 0
+...             }
+...         ]
+...     }
+... ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.mycol.find()
+{ "_id" : ObjectId("5f980f7130ab4091bfc7b891"), "title" : "MongoDB Overview", "description" : "MongoDB is no SQL database", "by" : "tutorials point", "url" : "http://www.tutorialspoint.com", "tags" : [ "mongodb", "database", "NoSQL" ], "likes" : 100 }
+{ "_id" : ObjectId("5f980f7130ab4091bfc7b892"), "title" : "NoSQL Database", "description" : "NoSQL database doesn't have tables", "by" : "tutorials point", "url" : "http://www.tutorialspoint.com", "tags" : [ "mongodb", "database", "NoSQL" ], "likes" : 20, "comments" : [ { "user" : "user1", "message" : "My first comment", "dateCreated" : ISODate("2013-12-10T02:35:00Z"), "like" : 0 } ] }
+> db.mycol.find().pretty()
+{
+	"_id" : ObjectId("5f980f7130ab4091bfc7b891"),
+	"title" : "MongoDB Overview",
+	"description" : "MongoDB is no SQL database",
+	"by" : "tutorials point",
+	"url" : "http://www.tutorialspoint.com",
+	"tags" : [
+		"mongodb",
+		"database",
+		"NoSQL"
+	],
+	"likes" : 100
+}
+{
+	"_id" : ObjectId("5f980f7130ab4091bfc7b892"),
+	"title" : "NoSQL Database",
+	"description" : "NoSQL database doesn't have tables",
+	"by" : "tutorials point",
+	"url" : "http://www.tutorialspoint.com",
+	"tags" : [
+		"mongodb",
+		"database",
+		"NoSQL"
+	],
+	"likes" : 20,
+	"comments" : [
+		{
+			"user" : "user1",
+			"message" : "My first comment",
+			"dateCreated" : ISODate("2013-12-10T02:35:00Z"),
+			"like" : 0
+		}
+	]
+}
+> db.mycol.findOne({title: "MongoDB Overview"})
+{
+	"_id" : ObjectId("5f980f7130ab4091bfc7b891"),
+	"title" : "MongoDB Overview",
+	"description" : "MongoDB is no SQL database",
+	"by" : "tutorials point",
+	"url" : "http://www.tutorialspoint.com",
+	"tags" : [
+		"mongodb",
+		"database",
+		"NoSQL"
+	],
+	"likes" : 100
+}
+> db.mycol.find({$and:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty()
+{
+	"_id" : ObjectId("5f980f7130ab4091bfc7b891"),
+	"title" : "MongoDB Overview",
+	"description" : "MongoDB is no SQL database",
+	"by" : "tutorials point",
+	"url" : "http://www.tutorialspoint.com",
+	"tags" : [
+		"mongodb",
+		"database",
+		"NoSQL"
+	],
+	"likes" : 100
+}
+> db.mycol.find(
+...    {
+...       $or: [
+...          {key1: value1}, {key2:value2}
+...       ]
+...    }
+... ).pretty()
+uncaught exception: ReferenceError: value1 is not defined :
+@(shell):4:11
+> db.mycol.find({$or:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).pretty()
+{
+	"_id" : ObjectId("5f980f7130ab4091bfc7b891"),
+	"title" : "MongoDB Overview",
+	"description" : "MongoDB is no SQL database",
+	"by" : "tutorials point",
+	"url" : "http://www.tutorialspoint.com",
+	"tags" : [
+		"mongodb",
+		"database",
+		"NoSQL"
+	],
+	"likes" : 100
+}
+{
+	"_id" : ObjectId("5f980f7130ab4091bfc7b892"),
+	"title" : "NoSQL Database",
+	"description" : "NoSQL database doesn't have tables",
+	"by" : "tutorials point",
+	"url" : "http://www.tutorialspoint.com",
+	"tags" : [
+		"mongodb",
+		"database",
+		"NoSQL"
+	],
+	"likes" : 20,
+	"comments" : [
+		{
+			"user" : "user1",
+			"message" : "My first comment",
+			"dateCreated" : ISODate("2013-12-10T02:35:00Z"),
+			"like" : 0
+		}
+	]
+}
+> db.mycol.find({"likes": {$gt:10}, $or: [{"by": "tutorials point"},
+...    {"title": "MongoDB Overview"}]}).pretty()
+{
+	"_id" : ObjectId("5f980f7130ab4091bfc7b891"),
+	"title" : "MongoDB Overview",
+	"description" : "MongoDB is no SQL database",
+	"by" : "tutorials point",
+	"url" : "http://www.tutorialspoint.com",
+	"tags" : [
+		"mongodb",
+		"database",
+		"NoSQL"
+	],
+	"likes" : 100
+}
+{
+	"_id" : ObjectId("5f980f7130ab4091bfc7b892"),
+	"title" : "NoSQL Database",
+	"description" : "NoSQL database doesn't have tables",
+	"by" : "tutorials point",
+	"url" : "http://www.tutorialspoint.com",
+	"tags" : [
+		"mongodb",
+		"database",
+		"NoSQL"
+	],
+	"likes" : 20,
+	"comments" : [
+		{
+			"user" : "user1",
+			"message" : "My first comment",
+			"dateCreated" : ISODate("2013-12-10T02:35:00Z"),
+			"like" : 0
+		}
+	]
+}
+> db.empDetails.insertMany(
+...     [
+...         {
+...             First_Name: "Radhika",
+...             Last_Name: "Sharma",
+...             Age: "26",
+...             e_mail: "radhika_sharma.123@gmail.com",
+...             phone: "9000012345"
+...         },
+...         {
+...             First_Name: "Rachel",
+...             Last_Name: "Christopher",
+...             Age: "27",
+...             e_mail: "Rachel_Christopher.123@gmail.com",
+...             phone: "9000054321"
+...         },
+...         {
+...             First_Name: "Fathima",
+...             Last_Name: "Sheik",
+...             Age: "24",
+...             e_mail: "Fathima_Sheik.123@gmail.com",
+...             phone: "9000054321"
+...         }
+...     ]
+... )
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("5f9813df30ab4091bfc7b893"),
+		ObjectId("5f9813df30ab4091bfc7b894"),
+		ObjectId("5f9813df30ab4091bfc7b895")
+	]
+}
+>
+> db.empDetails.find(
+...     {
+...         $nor:[
+...             40
+...             {"First_Name": "Radhika"},
+...             {"Last_Name": "Christopher"}
+...         ]
+...     }
+... ).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):5:12
+> db.empDetails.find(
+...     {
+...         $nor:[
+...             40
+...             {"First_Name": "Radhika"},
+...             {"Last_Name": "Christopher"}
+...         ]
+...     }
+... ).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):5:12
+> db.empDetails.find(     {         $nor:[             40             {"First_Name": "Radhika"},             {"Last_Name": "Christopher"}         ]     } ).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:68
+> db.empDetails.find(
+...     {
+...         $nor:[
+...             40
+...             {"First_Name": "Radhika"},
+...             {"Last_Name": "Christopher"}
+...         ]
+...     }
+... ).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):5:12
+> db.empDetails.find(
+...     {
+...         $nor:[
+...             {"First_Name": "Radhika"},
+...             {"Last_Name": "Christopher"}
+...         ]
+...     }
+... ).pretty()
+{
+	"_id" : ObjectId("5f9813df30ab4091bfc7b895"),
+	"First_Name" : "Fathima",
+	"Last_Name" : "Sheik",
+	"Age" : "24",
+	"e_mail" : "Fathima_Sheik.123@gmail.com",
+	"phone" : "9000054321"
+}
+> db.empDetails.find( { "Age": { $not: { $gt: "25" } } } )
+{ "_id" : ObjectId("5f9813df30ab4091bfc7b895"), "First_Name" : "Fathima", "Last_Name" : "Sheik", "Age" : "24", "e_mail" : "Fathima_Sheik.123@gmail.com", "phone" : "9000054321" }
+> {
+...     "_id" : ObjectId("5dd6636870fb13eec3963bf7"),
+...     "First_Name" : "Fathima",
+...     "Last_Name" : "Sheik",
+...     "Age" : "24",
+...     "e_mail" : "Fathima_Sheik.123@gmail.com",
+...     "phone" : "9000054321"
+... }
+uncaught exception: SyntaxError: unexpected token: ':' :
+@(shell):2:10
+> db.empDetails.find( { "Age": { $not: { $gt: "25" } } } )
+{ "_id" : ObjectId("5f9813df30ab4091bfc7b895"), "First_Name" : "Fathima", "Last_Name" : "Sheik", "Age" : "24", "e_mail" : "Fathima_Sheik.123@gmail.com", "phone" : "9000054321" }
+> cat ~/.dbshell
+uncaught exception: SyntaxError: unexpected token: '~' :
+@(shell):1:4
+> db.mycol.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> db.mycol.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.test.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.mycol.insert({ "_id" : ObjectId(5983548781331adf45ec5), "title":"MongoDB Overview"})
+uncaught exception: SyntaxError: identifier starts immediately after numeric literal :
+@(shell):1:35
+> db.insertOne({ "_id" : ObjectId(5983548781331adf45ec5), "title":"MongoDB Overview"})
+uncaught exception: SyntaxError: identifier starts immediately after numeric literal :
+@(shell):1:32
+> db.insertOne({"title":"MongoDB Overview"})
+uncaught exception: TypeError: db.insertOne is not a function :
+@(shell):1:1
+> db.mycol.insertOne({"title":"MongoDB Overview"})
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("5f98162530ab4091bfc7b896")
+}
+> db.mycol.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.mycol.find()
+{ "_id" : ObjectId("5f980f7130ab4091bfc7b891"), "title" : "New MongoDB Tutorial", "description" : "MongoDB is no SQL database", "by" : "tutorials point", "url" : "http://www.tutorialspoint.com", "tags" : [ "mongodb", "database", "NoSQL" ], "likes" : 100 }
+{ "_id" : ObjectId("5f980f7130ab4091bfc7b892"), "title" : "NoSQL Database", "description" : "NoSQL database doesn't have tables", "by" : "tutorials point", "url" : "http://www.tutorialspoint.com", "tags" : [ "mongodb", "database", "NoSQL" ], "likes" : 20, "comments" : [ { "user" : "user1", "message" : "My first comment", "dateCreated" : ISODate("2013-12-10T02:35:00Z"), "like" : 0 } ] }
+{ "_id" : ObjectId("5f98162530ab4091bfc7b896"), "title" : "New MongoDB Tutorial" }
+> db.mycol.save(
+...    {
+...       "_id" : ObjectId("507f191e810c19729de860ea"),
+...         "title":"Tutorials Point New Topic",
+...       "by":"Tutorials Point"
+...    }
+... )
+WriteResult({
+	"nMatched" : 0,
+	"nUpserted" : 1,
+	"nModified" : 0,
+	"_id" : ObjectId("507f191e810c19729de860ea")
+})
+> db.mycol.find()
+{ "_id" : ObjectId("5f980f7130ab4091bfc7b891"), "title" : "New MongoDB Tutorial", "description" : "MongoDB is no SQL database", "by" : "tutorials point", "url" : "http://www.tutorialspoint.com", "tags" : [ "mongodb", "database", "NoSQL" ], "likes" : 100 }
+{ "_id" : ObjectId("5f980f7130ab4091bfc7b892"), "title" : "NoSQL Database", "description" : "NoSQL database doesn't have tables", "by" : "tutorials point", "url" : "http://www.tutorialspoint.com", "tags" : [ "mongodb", "database", "NoSQL" ], "likes" : 20, "comments" : [ { "user" : "user1", "message" : "My first comment", "dateCreated" : ISODate("2013-12-10T02:35:00Z"), "like" : 0 } ] }
+{ "_id" : ObjectId("5f98162530ab4091bfc7b896"), "title" : "New MongoDB Tutorial" }
+{ "_id" : ObjectId("507f191e810c19729de860ea"), "title" : "Tutorials Point New Topic", "by" : "Tutorials Point" }
+> db.empDetails.insertMany(
+...     [
+...         {
+...             First_Name: "Radhika",
+...             Last_Name: "Sharma",
+...             Age: "26",
+...             e_mail: "radhika_sharma.123@gmail.com",
+...             phone: "9000012345"
+...         },
+...         {
+...             First_Name: "Rachel",
+...             Last_Name: "Christopher",
+...             Age: "27",
+...             e_mail: "Rachel_Christopher.123@gmail.com",
+...             phone: "9000054321"
+...         },
+...         {
+...             First_Name: "Fathima",
+...             Last_Name: "Sheik",
+...             Age: "24",
+...             e_mail: "Fathima_Sheik.123@gmail.com",
+...             phone: "9000054321"
+...         }
+...     ]
+... )
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("5f98189e30ab4091bfc7b897"),
+		ObjectId("5f98189e30ab4091bfc7b898"),
+		ObjectId("5f98189e30ab4091bfc7b899")
+	]
+}
+> db.empDetails.findOneAndUpdate(
+...     {First_Name: 'Radhika'},
+...     { $set: { Age: '30',e_mail: 'radhika_newemail@gmail.com'}}
+... )
+{
+	"_id" : ObjectId("5f9813df30ab4091bfc7b893"),
+	"First_Name" : "Radhika",
+	"Last_Name" : "Sharma",
+	"Age" : "26",
+	"e_mail" : "radhika_sharma.123@gmail.com",
+	"phone" : "9000012345"
+}
+> db.empDetails.updateOne(
+...     {First_Name: 'Radhika'},
+...     { $set: { Age: '30',e_mail: 'radhika_newemail@gmail.com'}}
+... )
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+> db.empDetails.updateMany(
+... {Age:{ $gt: "25" }},
+... { $set: { Age: '00'}}
+... )
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+> db.empDetails.find()
+{ "_id" : ObjectId("5f9813df30ab4091bfc7b893"), "First_Name" : "Radhika", "Last_Name" : "Sharma", "Age" : "00", "e_mail" : "radhika_newemail@gmail.com", "phone" : "9000012345" }
+{ "_id" : ObjectId("5f9813df30ab4091bfc7b894"), "First_Name" : "Rachel", "Last_Name" : "Christopher", "Age" : "00", "e_mail" : "Rachel_Christopher.123@gmail.com", "phone" : "9000054321" }
+{ "_id" : ObjectId("5f9813df30ab4091bfc7b895"), "First_Name" : "Fathima", "Last_Name" : "Sheik", "Age" : "24", "e_mail" : "Fathima_Sheik.123@gmail.com", "phone" : "9000054321" }
+{ "_id" : ObjectId("5f98189e30ab4091bfc7b897"), "First_Name" : "Radhika", "Last_Name" : "Sharma", "Age" : "00", "e_mail" : "radhika_sharma.123@gmail.com", "phone" : "9000012345" }
+{ "_id" : ObjectId("5f98189e30ab4091bfc7b898"), "First_Name" : "Rachel", "Last_Name" : "Christopher", "Age" : "00", "e_mail" : "Rachel_Christopher.123@gmail.com", "phone" : "9000054321" }
+{ "_id" : ObjectId("5f98189e30ab4091bfc7b899"), "First_Name" : "Fathima", "Last_Name" : "Sheik", "Age" : "24", "e_mail" : "Fathima_Sheik.123@gmail.com", "phone" : "9000054321" }
+>

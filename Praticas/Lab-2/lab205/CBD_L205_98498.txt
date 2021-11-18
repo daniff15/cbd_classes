@@ -1,37 +1,37 @@
 find({...}, {...})
-// 1 - Pessoas que têm mais de 50 anos
-db.pessoas.find({ age : {$gt : 50}})
+// 1 - Cidades com certificate_number maior que 9310780
+db.city_inspections.find({certificate_number : {$gt : 9310780}})
 
-// 2 - Mulheres
-db.pessoas.find({gender: "woman"})
+// 2 - Result = No Violation Issued
+db.city_inspections.find({result: "No Violation Issued"})
 
-// 3 - Pessoas em que o último nome não começa por "F"
-db.pessoas.find({lastName:{$not: { $regex : "F.*"}}})
+// 3 - Cidades em que o setor contêm Retail no nome
+db.city_inspections.find({sector:{ $regex : "Retail"}})
 
-// 4 - Listar a idade e o nome completo das pessoas que têm menos de 20 anos
-db.pessoas.find({ age : {$lt : 20}} , {firstName : 1, lastName:1, age: 1})
+// 4 - Listar a nome da cidade e o sector das cidades que o número é menor que 20000
+db.city_inspections.find({ "address.number" : {$lt : 20000}} , {city : 1, sector:1})
 
-// 5 - Listar as pessoas que têm idade [60,90]
-db.pessoas.find({$and : [{ age : {$gte : 60}} , {age : {$lte : 90}}]})
+// 5 - Listar o nome de cada negócio de NEW YORK 
+db.city_inspections.find({"address.city": "NEW YORK"}, {business_name : 1})
 
-// 6 - Nome completo das pessoas que vivem na rua "Avenida Dessarges" 
-db.pessoas.find({"address.streetAddress": "Avenida Dessarges"}, {firstName: 1 , lastName: 1})
+// 6 - Negócios que o result foi Pass e que são de STATEN ISLAND
+db.city_inspections.find({$and : [{"address.city": "STATEN ISLAND"}, {result : "Pass"}]})
+
 
 aggregate($group, $project, $unwind, $match, etc)
-// 1 - Listar o numero de pessoas por localidade
-db.pessoas.aggregate([{$group:{ _id: "$address.city", Total:{$sum: 1}}}])
+// 1 - Listar o numero de resultados de cada tipo
+db.city_inspections.aggregate([{$group:{ _id: "$result", Total:{$sum: 1}}}])
 
-// 2 - Apelido mais utilizado
-db.pessoas.aggregate([{$group:{ _id:"$lastName", sum:{$sum:1}}},{$sort:{sum:-1}},{$limit:1}])
+// 2 - Resultado mais usual
+db.city_inspections.aggregate([{$group:{ _id:"$result", sum:{$sum:1}}},{$sort:{sum:-1}},{$limit:1}])
 
-// 3 - Listar o nome completo de todas as pessoas
-db.pessoas.aggregate([{$project: {"firstName": 1, "lastName": 1}}])   
+// 3 - Listar o nome do negócio e a cidade
+db.city_inspections.aggregate([{$project: {"business_name": 1, "address.city": 1}}])   
 
-// 4 - Ordenar as pessoas pelo seu ultimo nome de forma decrescente
-db.pessoas.aggregate([{$project: {"lastName": 1}}, {$sort : {"lastName" : -1}}])
+// 4 - Ordenar os negócios pelo seu nome de forma decrescente
+db.city_inspections.aggregate([{$project: {"business_name": 1}}, {$sort : {"business_name" : -1}}])
 
-// 5 - Média de idades
-db.pessoas.aggregate([{$group : {_id : "$item", avgAge: {$avg: "$age"}}}])
+// 5 - Conte quantos negócios há em cada cidade
+db.city_inspections.aggregate([{$group:{_id:"$address.city", num:{$sum:1}}}])
 
-// 6 - Média de idades por cidade ordenada por ordem decrescente
-db.pessoas.aggregate([{$group : {_id : "$address.city", avgAge: {$avg: "$age"}}} , {$sort : {avgAge : -1}}])
+// 6 - Conte quanto negócios tiveram como result = Pass em "JAMAICA"
