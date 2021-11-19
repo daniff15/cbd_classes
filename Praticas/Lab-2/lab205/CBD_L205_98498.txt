@@ -34,4 +34,5 @@ db.city_inspections.aggregate([{$project: {"business_name": 1}}, {$sort : {"busi
 // 5 - Conte quantos negócios há em cada cidade
 db.city_inspections.aggregate([{$group:{_id:"$address.city", num:{$sum:1}}}])
 
-// 6 - Conte quanto negócios tiveram como result = Pass em "JAMAICA"
+// 6 - Inspeções que têm certificate_number > 50000000
+db.city_inspections.aggregate([{$match:{certificate_number: {$gt: 50000000}}}])
