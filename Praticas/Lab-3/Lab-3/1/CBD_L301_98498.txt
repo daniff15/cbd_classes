@@ -1,0 +1,87 @@
+cqlsh
+
+CREATE KEYSPACE tutorialspoint
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
+
+USE tutorialspoint;
+
+CREATE TABLE emp(
+   emp_id int PRIMARY KEY,
+   emp_name text,
+   emp_city text,
+   emp_sal varint,
+   emp_phone varint
+   );
+
+select * from emp;
+
+ALTER TABLE emp ADD emp_email text;
+
+select * from emp;
+
+ALTER TABLE emp DROP emp_email;
+
+select * from emp;
+
+DROP TABLE emp;
+
+DESCRIBE COLUMNFAMILIES;
+
+INSERT INTO emp (emp_id, emp_name, emp_city,
+   emp_phone, emp_sal) VALUES(1,'ram', 'Hyderabad', 9848022338, 50000);
+
+INSERT INTO emp (emp_id, emp_name, emp_city,
+   emp_phone, emp_sal) VALUES(2,'robin', 'Hyderabad', 9848022339, 40000);
+
+INSERT INTO emp (emp_id, emp_name, emp_city,
+   emp_phone, emp_sal) VALUES(3,'rahman', 'Chennai', 9848022330, 45000);
+
+SELECT * FROM emp;
+
+UPDATE emp SET emp_city='Delhi',emp_sal=50000
+   WHERE emp_id=2;
+
+select * from emp;
+
+SELECT emp_name, emp_sal from emp;
+
+CREATE INDEX ON emp(emp_sal);
+
+SELECT * FROM emp WHERE emp_sal=50000;
+
+DELETE emp_sal FROM emp WHERE emp_id=3;
+
+select * from emp;
+
+DELETE FROM emp WHERE emp_id=3;
+
+select * from emp;
+
+CREATE TABLE data(name text PRIMARY KEY, email list<text>);
+
+INSERT INTO data(name, email) VALUES ('ramu',
+['abc@gmail.com','cba@yahoo.com'])
+
+UPDATE data SET email = email +['xyz@tutorialspoint.com'] where name = 'ramu';
+
+SELECT * FROM data;
+
+CREATE TABLE data2 (name text PRIMARY KEY, phone set<varint>);
+
+INSERT INTO data2(name, phone)VALUES ('rahman',    {9848022338,9848022339});
+
+SELECT * FROM data;
+
+UPDATE data2 SET phone = phone + {9848022330} where name = 'rahman';
+
+SELECT * FROM data;
+
+CREATE TABLE data3 (name text PRIMARY KEY, address
+map<text, text>);
+
+INSERT INTO data3 (name, address)
+   VALUES ('robin', {'home' : 'hyderabad' , 'office' : 'Delhi' } );
+
+UPDATE data3 SET address = address+{'office':'mumbai'} WHERE name = 'robin';
+
+select * from data3;

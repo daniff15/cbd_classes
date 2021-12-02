@@ -1,0 +1,38 @@
+ emp_id | emp_city | emp_name | emp_phone | emp_sal
+--------+----------+----------+-----------+---------
+
+(0 rows)
+
+ emp_id | emp_city | emp_email | emp_name | emp_phone | emp_sal
+--------+----------+-----------+----------+-----------+---------
+
+(0 rows)
+
+ emp_id | emp_city | emp_name | emp_phone | emp_sal
+--------+----------+----------+-----------+---------
+
+(0 rows)
+
+ emp_id | emp_city  | emp_name | emp_phone  | emp_sal
+--------+-----------+----------+------------+---------
+      1 | Hyderabad |      ram | 9848022338 |   50000
+      2 | Hyderabad |    robin | 9848022339 |   40000
+      3 |   Chennai |   rahman | 9848022330 |   45000
+
+(3 rows)
+
+ emp_id | emp_city  | emp_name | emp_phone  | emp_sal
+--------+-----------+----------+------------+---------
+      1 | Hyderabad |      ram | 9848022338 |   50000
+      2 |     Delhi |    robin | 9848022339 |   50000
+      3 |   Chennai |   rahman | 9848022330 |   45000
+
+(3 rows)
+
+ emp_name | emp_sal
+----------+---------
+      ram |   50000
+    robin |   50000
+   rahman |   45000
+
+(3 rows)
