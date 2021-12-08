@@ -1,0 +1,10 @@
+{"user": "andre@gmail.com", "video_id": "30705260-562c-11ec-a36b-d9fa4527049e", "real_timestamp": "2021-12-06 01:18:15.920Z", "video_timestamp": 0, "action": "Start", "id": "637e0701-5632-11ec-a36b-d9fa4527049e"}
+{"user": "luis@gmail.com", "video_id": "3c8eacd0-535d-11ec-a001-09297e8e3404", "real_timestamp": "2021-12-06 01:18:15.884Z", "video_timestamp": 200, "action": "Stop", "id": "637888c1-5632-11ec-a36b-d9fa4527049e"}
+{"user": "daniel@gmail.com", "video_id": "307b00c0-562c-11ec-a36b-d9fa4527049e", "real_timestamp": "2021-12-06 01:18:15.905Z", "video_timestamp": 100, "action": "Pause", "id": "637bbd11-5632-11ec-a36b-d9fa4527049e"}
+{"user": "eva@gmail.com", "video_id": "30705260-562c-11ec-a36b-d9fa4527049e", "real_timestamp": "2021-12-06 01:18:15.978Z", "video_timestamp": 34, "action": "Stop", "id": "6386e0a1-5632-11ec-a36b-d9fa4527049e"}
+{"user": "zepedro@gmail.com", "video_id": "307b00c0-562c-11ec-a36b-d9fa4527049e", "real_timestamp": "2021-12-06 01:18:16.001Z", "video_timestamp": 55, "action": "Stop", "id": "638a6311-5632-11ec-a36b-d9fa4527049e"}
+{"user": "raquel@gmail.com", "video_id": "307163d0-562c-11ec-a36b-d9fa4527049e", "real_timestamp": "2021-12-06 01:18:15.827Z", "video_timestamp": 0, "action": "Play", "id": "636fd631-5632-11ec-a36b-d9fa4527049e"}
+{"user": "zepedro@gmail.com", "video_id": "3074bf30-562c-11ec-a36b-d9fa4527049e", "real_timestamp": "2021-12-06 01:18:15.865Z", "video_timestamp": 0, "action": "Play", "id": "6375a291-5632-11ec-a36b-d9fa4527049e"}
+{"user": "pedro@gmail.com", "video_id": "30781a90-562c-11ec-a36b-d9fa4527049e", "real_timestamp": "2021-12-06 01:18:15.940Z", "video_timestamp": 40, "action": "Pause", "id": "63811441-5632-11ec-a36b-d9fa4527049e"}
+{"user": "danifgrd8@gmail.com", "video_id": "30705260-562c-11ec-a36b-d9fa4527049e", "real_timestamp": "2021-12-06 01:18:15.847Z", "video_timestamp": 50, "action": "Pause", "id": "63730a80-5632-11ec-a36b-d9fa4527049e"}
+{"user": "filipe@gmail.com", "video_id": "62ddcdd0-535d-11ec-a001-09297e8e3404", "real_timestamp": "2021-12-06 01:18:15.955Z", "video_timestamp": 0, "action": "Play", "id": "63835e31-5632-11ec-a36b-d9fa4527049e"}

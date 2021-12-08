@@ -1,0 +1,33 @@
+SELECT * FROM Video_author WHERE author_email = 'danifgrd8@gmail.com';
+
+ author_email        | upload_timestamp                | description            | id                                   | name          | tags
+---------------------+---------------------------------+------------------------+--------------------------------------+---------------+-----------------------------
+ danifgrd8@gmail.com | 2021-12-06 02:06:45.045000+0000 |     Videos a cada hora | 29774651-5639-11ec-a36b-d9fa4527049e | Video da hora | {'Aveiro', 'Coisas', 'Top'}
+ danifgrd8@gmail.com | 2021-12-06 02:06:45.062000+0000 | Rally Tascas em Aveiro | 2979de61-5639-11ec-a36b-d9fa4527049e |         Rally |         {'Aveiro', 'Rally'}
+
+(2 rows)
+
+SELECT * FROM Comentario_user WHERE author_email = 'raquel@gmail.com';
+
+ author_email     | upload_timestamp                | id                                   | comment   | video_id
+------------------+---------------------------------+--------------------------------------+-----------+--------------------------------------
+ raquel@gmail.com | 2021-12-06 02:09:28.956000+0000 | 8b2a1bc1-5639-11ec-a36b-d9fa4527049e | Ai credo! | 307163d0-562c-11ec-a36b-d9fa4527049e
+
+(1 rows)
+
+SELECT * FROM Comentario_video WHERE video_id = 30705260-562c-11ec-a36b-d9fa4527049e;
+
+ video_id                             | upload_timestamp                | id                                   | author_email    | comment
+--------------------------------------+---------------------------------+--------------------------------------+-----------------+-------------------------
+ 30705260-562c-11ec-a36b-d9fa4527049e | 2021-12-06 02:10:30.349000+0000 | afc1efd1-5639-11ec-a36b-d9fa4527049e | andre@gmail.com |          Adoro animais!
+ 30705260-562c-11ec-a36b-d9fa4527049e | 2021-12-06 02:10:30.330000+0000 | afbf09a1-5639-11ec-a36b-d9fa4527049e |   eva@gmail.com | Oh my god que fofinhos!
+
+(2 rows)
+
+SELECT avg(value), count(value) FROM Rating WHERE video_id = 307b00c0-562c-11ec-a36b-d9fa4527049e;
+
+ system.avg(value) | system.count(value)
+-------------------+---------------------
+                 4 |                   4
+
+(1 rows)

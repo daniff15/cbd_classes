@@ -1,0 +1,131 @@
+CREATE KEYSPACE cbd_lab3_2 WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};
+
+USE cbd_lab3_2;
+
+CREATE TABLE User(
+    username text,
+    name text,
+    email text PRIMARY KEY,
+    registration_date timestamp,
+);
+
+CREATE TABLE Video ( 
+    id uuid,  
+    author_email text, 
+    name text, 
+    description text, 
+    tags set<text>,  
+    upload_timestamp timestamp, 
+    PRIMARY KEY(id, author_email, upload_timestamp)) 
+    WITH CLUSTERING ORDER BY (author_email ASC, upload_timestamp DESC
+);
+
+ CREATE TABLE Comentario (
+    id uuid,
+    video_id uuid,
+    author_email text,
+    comment text,
+    upload_timestamp timestamp,
+    PRIMARY KEY(author_email, upload_timestamp, id))
+    WITH CLUSTERING ORDER BY (upload_timestamp DESC 
+);
+
+CREATE TABLE video_follower (
+    user_email text,
+    video_id uuid,
+    PRIMARY KEY (user_email, video_id)
+);
+
+CREATE TABLE evento (
+    id uuid,
+    user text,
+    video_id uuid,
+    action text,
+    real_timestamp timestamp,
+    video_timestamp int, 
+    PRIMARY KEY((user, video_id), real_timestamp, video_timestamp))
+    WITH CLUSTERING ORDER BY (real_timestamp DESC);
+)
+
+CREATE TABLE Rating (
+    id uuid,
+    video_id uuid,
+    value int, 
+    PRIMARY KEY(video_id, id)
+);
+
+INSERT INTO user (email, name, registration_date , username) Values (raquel@gmail.com, Raquel, 2021-12-02 10:41:28.030000+0000, keke);
+INSERT INTO user (email, name, registration_date , username) Values (luis@gmail.com, Luis, 2021-12-02 10:40:48.841000+0000, costa);
+INSERT INTO user (email, name, registration_date , username) Values (filipe@gmail.com, Filipe, 2021-12-02 10:40:35.574000+0000, filiboy);
+INSERT INTO user (email, name, registration_date , username) Values (leonor@gmail.com, Leonor, 2021-12-02 10:42:05.115000+0000, leonor);
+INSERT INTO user (email, name, registration_date , username) Values (pedro@gmail.com, Pedro, 2021-12-02 10:39:51.908000+0000, pedrocas);
+INSERT INTO user (email, name, registration_date , username) Values (dani.fig@ua.pt, Dani Figueiredo, 2021-12-02 10:39:35.566000+0000, dani2);
+INSERT INTO user (email, name, registration_date , username) Values (daniel@gmail.com, Daniel, 2021-12-02 10:41:48.410000+0000, daniel);
+INSERT INTO user (email, name, registration_date , username) Values (zepedro@gmail.com, Ze Pedro, 2021-12-02 10:41:07.114000+0000, zep);
+INSERT INTO user (email, name, registration_date , username) Values (eva@gmail.com, Eva, 2021-12-02 10:40:20.488000+0000, eva);
+INSERT INTO user (email, name, registration_date , username) Values (danifgrd8@gmail.com, Dani, 2021-12-02 10:39:02.873000+0000, daniff15);
+INSERT INTO user (email, name, registration_date , username) Values (andre@gmail.com, Andre, 2021-12-02 10:40:07.542000+0000, andre);
+
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'danifgrd8@gmail.com', 'Video da hora', 'Videos a cada hora', {'Aveiro', 'Top', 'Coisas'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'danifgrd8@gmail.com', 'Rally', 'Rally Tascas em Aveiro', {'Aveiro', 'Rally'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'dani.fig@ua.pt', 'Rally de carros', 'Rally poeirento', {'Aveiro', 'Rally', 'Carros'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'raquel@gmail.com', 'Enfermagem', 'Um dia em Enfermagem', {'Enfermagem', 'Random'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'raquel@gmail.com', 'Enfermeira de caes', 'Um dia com os bichinhos', {'Animais', 'PetCare'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'pedro@gmail.com', 'Um dia negro', 'Rodeado por cobras negras no deserto... Que medo!', {'Animais', 'Random', 'Terror'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'luis@gmail.com', 'Corridas', 'Atletismo é a minha vida', {'Atletismo'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'filipe@gmail.com', 'F1', 'Max vs Hammilton (YIKES)', {'Carros'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'leonor@gmail.com', 'Viver a life', 'Hoje fomos passear por Aveiro', {'Aveiro', 'Random'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'daniel@gmail.com', 'Viver a life 2', 'Hoje fomos passear por Aveiro com a leonor', {'Aveiro', 'Random'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'zepedro@gmail.com', 'Viver a life 3', 'Hoje fomos passear por Aveiro com a leonor e o daniel', {'Aveiro', 'Random'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'andre@gmail.com', 'Challenge', 'Fui para um teste sem comer nada... Deu certo?', {'Universidade', 'Random'}, dateof(now()));
+INSERT INTO video (id , author_email , name, description, tags, upload_timestamp) VALUES ( now(), 'eva@gmail.com', 'Estou com medo', 'Faltei a uma aula da Universidade, será que vou chumbar', {'Universidade', 'Terror' , 'Random'}, dateof(now()));
+
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 30705260-562c-11ec-a36b-d9fa4527049e, 'eva@gmail.com', 'Oh my god que fofinhos!', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 30705260-562c-11ec-a36b-d9fa4527049e, 'andre@gmail.com', 'Adoro animais!', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 3c8eacd0-535d-11ec-a001-09297e8e3404, 'luis@gmail.com', 'Aguinha', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 30781a90-562c-11ec-a36b-d9fa4527049e, 'pedro@gmail.com', 'Verstappen 4ever crlh!!!!! Luis é burro', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 307b00c0-562c-11ec-a36b-d9fa4527049e, 'daniel@gmail.com', 'Dia bem passado', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 307b00c0-562c-11ec-a36b-d9fa4527049e, 'zepedro@gmail.com', 'Foi um dia top, obrigado', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 30864b60-562c-11ec-a36b-d9fa4527049e, 'danifgrd8@gmail.com', 'Desmaias-te!', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 219c0620-535d-11ec-a001-09297e8e3404, 'andre@gmail.com', 'Quando é o proximo video', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 62ddcdd0-535d-11ec-a001-09297e8e3404, 'filipe@gmail.com', 'Enchi-me de tossir', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 307163d0-562c-11ec-a36b-d9fa4527049e, 'raquel@gmail.com', 'Ai credo!', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 77b5b0f0-535e-11ec-a001-09297e8e3404, 'eva@gmail.com', 'Que random ahahaha', dateof(now()));
+INSERT INTO Comentario(id, video_id, author_email ,comment ,upload_timestamp) VALUES (now() , 3074bf30-562c-11ec-a36b-d9fa4527049e, 'zepedro@gmail.com', 'RTF!', dateof(now()));
+
+INSERT INTO video_follower (user_email , video_id) VALUES ('eva@gmail.com', 30705260-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO video_follower (user_email , video_id) VALUES ('andre@gmail.com', 30705260-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO video_follower (user_email , video_id) VALUES ('danifgrd8@gmail.com', 30705260-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO video_follower (user_email , video_id) VALUES ('daniel@gmail.com', 307b00c0-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO video_follower (user_email , video_id) VALUES ('zepedro@gmail.com', 307b00c0-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO video_follower (user_email , video_id) VALUES ('luis@gmail.com', 3c8eacd0-535d-11ec-a001-09297e8e3404);
+INSERT INTO video_follower (user_email , video_id) VALUES ('pedro@gmail.com', 30781a90-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO video_follower (user_email , video_id) VALUES ('danifgrd8@gmail.com',30864b60-562c-11ec-a36b-d9fa4527049e );
+INSERT INTO video_follower (user_email , video_id) VALUES ('andre@gmail.com', 219c0620-535d-11ec-a001-09297e8e3404);
+INSERT INTO video_follower (user_email , video_id) VALUES ('filipe@gmail.com', 62ddcdd0-535d-11ec-a001-09297e8e3404);
+INSERT INTO video_follower (user_email , video_id) VALUES ('raquel@gmail.com', 307163d0-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO video_follower (user_email , video_id) VALUES ('eva@gmail.com', 77b5b0f0-535e-11ec-a001-09297e8e3404);
+INSERT INTO video_follower (user_email , video_id) VALUES ('zepedro@gmail.com', 3074bf30-562c-11ec-a36b-d9fa4527049e);
+
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'raquel@gmail.com', 307163d0-562c-11ec-a36b-d9fa4527049e, 'Play', dateof(now()), 0);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'danifgrd8@gmail.com',30705260-562c-11ec-a36b-d9fa4527049e , 'Pause', dateof(now()), 50);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'zepedro@gmail.com', 3074bf30-562c-11ec-a36b-d9fa4527049e, 'Play', dateof(now()), 0);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'luis@gmail.com', 3c8eacd0-535d-11ec-a001-09297e8e3404, 'Stop', dateof(now()), 200);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'daniel@gmail.com', 307b00c0-562c-11ec-a36b-d9fa4527049e, 'Pause', dateof(now()), 100);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'andre@gmail.com',30705260-562c-11ec-a36b-d9fa4527049e , 'Start', dateof(now()), 0);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'pedro@gmail.com', 30781a90-562c-11ec-a36b-d9fa4527049e, 'Pause', dateof(now()), 40);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'filipe@gmail.com', 62ddcdd0-535d-11ec-a001-09297e8e3404, 'Play', dateof(now()), 0);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'eva@gmail.com', 30705260-562c-11ec-a36b-d9fa4527049e, 'Stop', dateof(now()), 34);
+INSERT INTO evento (id, user, video_id, action,real_timestamp, video_timestamp) VALUES (now(), 'zepedro@gmail.com', 307b00c0-562c-11ec-a36b-d9fa4527049e, 'Stop', dateof(now()), 55);
+
+INSERT INTO Rating (id, video_id, value) VALUES (now(),30705260-562c-11ec-a36b-d9fa4527049e , 5);
+INSERT INTO Rating (id, video_id, value) VALUES (now(), 307b00c0-562c-11ec-a36b-d9fa4527049e, 4);
+INSERT INTO Rating (id, video_id, value) VALUES (now(), 3c8eacd0-535d-11ec-a001-09297e8e3404, 3);
+INSERT INTO Rating (id, video_id, value) VALUES (now(),30781a90-562c-11ec-a36b-d9fa4527049e , 4);
+INSERT INTO Rating (id, video_id, value) VALUES (now(),219c0620-535d-11ec-a001-09297e8e3404 , 5);
+INSERT INTO Rating (id, video_id, value) VALUES (now(),62ddcdd0-535d-11ec-a001-09297e8e3404 , 5);
+INSERT INTO Rating (id, video_id, value) VALUES (now(), 307163d0-562c-11ec-a36b-d9fa4527049e, 4);
+INSERT INTO Rating (id, video_id, value) VALUES (now(), 77b5b0f0-535e-11ec-a001-09297e8e3404, 3);
+INSERT INTO Rating (id, video_id, value) VALUES (now(), 3074bf30-562c-11ec-a36b-d9fa4527049e, 2);
+INSERT INTO Rating (id, video_id, value) VALUES (now(), 308a9120-562c-11ec-a36b-d9fa4527049e, 2);
+INSERT INTO Rating (id, video_id, value) VALUES (now(), 30831710-562c-11ec-a36b-d9fa4527049e, 4);

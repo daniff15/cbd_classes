@@ -1,0 +1,23 @@
+//ALINEA D
+1) 
+SELECT * FROM comentario_video LIMIT 3;
+
+ video_id                             | upload_timestamp                | id                                   | author_email    | comment
+--------------------------------------+---------------------------------+--------------------------------------+-----------------+-------------------------
+ 30705260-562c-11ec-a36b-d9fa4527049e | 2021-12-06 02:30:48.402000+0000 | 85c61321-563c-11ec-a36b-d9fa4527049e | andre@gmail.com |          Adoro animais!
+ 30705260-562c-11ec-a36b-d9fa4527049e | 2021-12-06 02:30:48.386000+0000 | 85c3a221-563c-11ec-a36b-d9fa4527049e |   eva@gmail.com | Oh my god que fofinhos!
+ 3c8eacd0-535d-11ec-a001-09297e8e3404 | 2021-12-06 02:30:48.423000+0000 | 85c94771-563c-11ec-a36b-d9fa4527049e |  luis@gmail.com |                 Aguinha
+
+(3 rows)
+
+2)
+SELECT tags FROM video_video WHERE id = 30864b60-562c-11ec-a36b-d9fa4527049e;
+
+ tags
+--------------------------------------
+ {'Random', 'Terror', 'Universidade'}
+
+(1 rows)
+
+3)
+
