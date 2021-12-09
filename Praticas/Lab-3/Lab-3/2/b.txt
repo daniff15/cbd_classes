@@ -32,7 +32,8 @@ CREATE TABLE Video_video (
     description text, 
     tags set<text>,  
     upload_timestamp timestamp, 
-    PRIMARY KEY(id, tags, upload_timestamp)
+    PRIMARY KEY(id, upload_timestamp))
+    WITH CLUSTERING ORDER BY (upload_timestamp DESC
 );
 
 CREATE TABLE Comentario_user (
@@ -58,7 +59,7 @@ CREATE TABLE Comentario_video (
 CREATE TABLE video_follower (
     user_email text,
     video_id uuid,
-    PRIMARY KEY (user_email, video_id)
+    PRIMARY KEY (video_id, user_email)
 );
 
 CREATE TABLE evento (
@@ -70,13 +71,14 @@ CREATE TABLE evento (
     video_timestamp int, 
     PRIMARY KEY((user, video_id), real_timestamp, video_timestamp))
     WITH CLUSTERING ORDER BY (real_timestamp DESC);
-)
+);
 
 CREATE TABLE Rating (
     id uuid,
     video_id uuid,
     value int, 
-    PRIMARY KEY(video_id, id)
+    PRIMARY KEY((video_id), value))
+    WITH CLUSTERING ORDER BY (value DESC
 );
 
 INSERT INTO user (email, name, registration_date , username) Values (raquel@gmail.com, Raquel, 2021-12-02 10:41:28.030000+0000, keke);
