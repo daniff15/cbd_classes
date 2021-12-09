@@ -40,20 +40,8 @@ SELECT * FROM video_author WHERE author_email='raquel@gmail.com' and upload_time
 (1 rows)
 
 6)
-SELECT * FROM video_video LIMIT 10;
-
- id                                   | upload_timestamp                | author_email        | description                                             | name               | tags
---------------------------------------+---------------------------------+---------------------+---------------------------------------------------------+--------------------+--------------------------------------
- 30705260-562c-11ec-a36b-d9fa4527049e | 2021-12-09 00:10:15.705000+0000 | danifgrd8@gmail.com |                                  Rally Tascas em Aveiro |              Rally |                  {'Aveiro', 'Rally'}
- 299f40b1-5639-11ec-a36b-d9fa4527049e | 2021-12-09 00:10:15.911000+0000 |    daniel@gmail.com |              Hoje fomos passear por Aveiro com a leonor |     Viver a life 2 |                 {'Aveiro', 'Random'}
- 299814c1-5639-11ec-a36b-d9fa4527049e | 2021-12-09 00:10:15.879000+0000 |    leonor@gmail.com |                           Hoje fomos passear por Aveiro |       Viver a life |                 {'Aveiro', 'Random'}
- 3c8eacd0-535d-11ec-a001-09297e8e3404 | 2021-12-09 00:10:15.966000+0000 |     andre@gmail.com |          Fui para um teste sem comer nada... Deu certo? |          Challenge |           {'Random', 'Universidade'}
- 307163d0-562c-11ec-a36b-d9fa4527049e | 2021-12-09 00:10:15.811000+0000 |     pedro@gmail.com |       Rodeado por cobras negras no deserto... Que medo! |       Um dia negro |      {'Animais', 'Random', 'Terror'}
- 62ddcdd0-535d-11ec-a001-09297e8e3404 | 2021-12-09 00:10:15.833000+0000 |      luis@gmail.com |                                Atletismo é a minha vida |           Corridas |                        {'Atletismo'}
- 3074bf30-562c-11ec-a36b-d9fa4527049e | 2021-12-09 00:10:15.733000+0000 |      dani.fig@ua.pt |                                         Rally poeirento |    Rally de carros |        {'Aveiro', 'Carros', 'Rally'}
- 2993f611-5639-11ec-a36b-d9fa4527049e | 2021-12-09 00:10:15.861000+0000 |    filipe@gmail.com |                                Max vs Hammilton (YIKES) |                 F1 |                           {'Carros'}
- 307b00c0-562c-11ec-a36b-d9fa4527049e | 2021-12-09 00:10:15.778000+0000 |    raquel@gmail.com |                                 Um dia com os bichinhos | Enfermeira de caes |               {'Animais', 'PetCare'}
- 30864b60-562c-11ec-a36b-d9fa4527049e | 2021-12-09 00:10:15.995000+0000 |       eva@gmail.com | Faltei a uma aula da Universidade, será que vou chumbar |     Estou com medo | {'Random', 'Terror', 'Universidade'}
+Em cassandra só é possível ordenar por partições, ou seja, como a primary key tem duas partes (partition and clustering key), teremos de ordenar com base 
+nessa partição, como a partition key seria um id de um video e a clustering seria o tempo do vídeo, não iria dar para ordenar pois o id é único.
 
  7)
  SELECT * FROM video_follower WHERE video_id=30705260-562c-11ec-a36b-d9fa4527049e;
@@ -67,6 +55,17 @@ SELECT * FROM video_video LIMIT 10;
 (3 rows)
 
 8)
+Com apenas uma query não é possível pois teria que se usar JOIN, algo que não é possível em Cassandra
+Uma outra opção seria ver os vídeos que um utilizador está a seguir(query à parte) e depois para cada dos videos resultantes da query, fazer outra query 
+e ver todos os comentários dos videos que esse utilizador está a seguir
 
 9)
+Não é possível devido ao mesmo problema da alínea 6
+
+10)
+Não é possível devido ao mesmo problema da alínea 6 e 9
+
+11) 
+
+
 
