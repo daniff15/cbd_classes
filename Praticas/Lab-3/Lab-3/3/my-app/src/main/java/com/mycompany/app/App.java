@@ -9,31 +9,41 @@ public class App
 
     public static void main( String[] args )
     {
-        try {
-            Cluster cluster = Cluster.builder().addContactPoints("localhost").build();
+        Cluster cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
+        Session session = cluster.connect("cbd_lab3_2");
 
-            session = cluster.connect("cbd_lab3_2");
+        //ADDING
 
-            //Insert a user
-            //insertUser("novoUser", "Novo User", "novo@gmail.com", "2021-12-09 10:38:28.030000+0000");
+        session.execute("INSERT INTO user (email, name, registration_date, username) VALUES ('manu@gmail.com', 'Emanuel', '2021-12-11 16:26:28.030000+0000', 'Manu');");
+        System.out.println("Inserted user Manu");
 
-        }
-        catch(Exception e){
-            System.err.println("Error connecting to Cassandra database: " + e);
-        }
-    }
+        //UPDATING
 
+        session.execute("UPDATE user SET name='Manuel' WHERE email='manu@gmail.com';");
+        System.out.println();
+        System.out.println("Updated user Manu");
 
-    public static void insertUser(String username, String name, String email, String timestamp){
-        try {
-            StringBuilder sb = new StringBuilder("INSERT INTO ")
-                    .append("user").append("(email, name, registration_date, username) ")
-                    .append("VALUES (").append(email).append(", '" + name + "'").append(", '" + timestamp + "'").append(", '" + username + "'");
-            String query = sb.toString();
-            session.execute(query);
-            System.out.println("User insertado com sucesso!");
-        }catch (Exception e){
-            System.err.println("Error inserting into Cassandra database: " + e);
-        }
+        //DELETING
+
+        session.execute("DELETE FROM User WHERE email='manu@gmail.com';");
+        System.out.println("Deleted user Manu");
+
+        //queries
+        System.out.println();
+        System.out.println("Last 3 comments introducted:");
+        session.execute("SELECT * FROM comentario_video LIMIT 3;");
+
+        System.out.println();
+        System.out.println("Tag list from a certain video:");
+        session.execute("SELECT tags FROM video_video WHERE id = 30864b60-562c-11ec-a36b-d9fa4527049e;");
+
+        System.out.println();
+        System.out.println("Last 5 events from certain video by a user:");
+        session.execute("SELECT * FROM video_author WHERE author_email='raquel@gmail.com' and upload_timestamp<'2021-12-09 00:06:18.154000+0000';");
+
+        System.out.println();
+        System.out.println("All followers from certain video:");
+        session.execute("SELECT * FROM video_follower WHERE video_id=30705260-562c-11ec-a36b-d9fa4527049e;");
+
     }
 }
