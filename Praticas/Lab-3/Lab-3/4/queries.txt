@@ -1,0 +1,102 @@
+#Create index on table classes to search in map
+
+1) SELECT * FROM classes WHERE pre_req['CBD'] = 'BD';
+
+ id | pre_req
+----+---------------------------------
+  1 |     {'CBD': 'BD', 'SO': 'Bash'}
+  2 | {'CBD': 'BD', 'MPEI': 'Matlab'}
+
+(2 rows)
+
+2) Students that have CBD 
+#Create index on table student_id to search by classes
+
+SELECT * FROM student_id WHERE classes CONTAINS 'CBD';
+
+ id | classes                     | course | name
+----+-----------------------------+--------+---------
+  1 | ['CBD', 'MPEI', 'SO', 'SM'] |     EI | Aluno 1
+  2 | ['CBD', 'MPEI', 'SO', 'RS'] |     EI | Aluno 2
+  3 |  ['CBD', 'BD', 'TPW', 'SM'] |     EI | Aluno 3
+
+(3 rows)
+
+3) Search teacher By Name
+SELECT * FROM teacher_name WHERE name = 'Amador Silva';
+
+ name         | email            | id
+--------------+------------------+----
+ Amador Silva | {'amador@ua.pt'} |  8
+
+(1 rows)
+
+4) SELECT * FROM student_id WHERE id=8;
+
+ id | classes                     | course | name
+----+-----------------------------+--------+---------
+  8 | ['SIO', 'MPEI', 'IA', 'SO'] |     CT | Aluno 8
+
+(1 rows)
+
+5) 5 students;
+SELECT * FROM student_id LIMIT 5; 
+
+ id | classes                               | course | name
+----+---------------------------------------+--------+----------
+  5 |           ['FP', 'Facil', 'EI', 'MS'] |    EGI |  Aluno 5
+ 10 | ['Desenho', 'Construção', 'C1', 'C2'] |  Civil | Aluno 10
+ 11 | ['Desenho', 'Construção', 'C1', 'C2'] |  Civil | Aluno 11
+  1 |           ['CBD', 'MPEI', 'SO', 'SM'] |     EI |  Aluno 1
+  8 |           ['SIO', 'MPEI', 'IA', 'SO'] |     CT |  Aluno 8
+
+(5 rows)
+
+6) Search by dept
+SELECT * FROM emp_by_dept WHERE dept='IT';
+
+ dept | empno
+------+-------
+   IT |     1
+   IT |     2
+   IT |     3
+   IT |     4
+
+(4 rows)
+
+7) SELECT * FROM teacher_name WHERE name = 'Antonio Vilela' and email CONTAINS 'vilela@ua.pt';
+
+ name           | email                                 | id
+----------------+---------------------------------------+----
+ Antonio Vilela | {'luisvil@gmail.com', 'vilela@ua.pt'} |  1
+
+(1 rows)
+
+8) SELECT * FROM emp_by_dept WHERE dept='IETA' LIMIT 2;
+
+ dept | empno
+------+-------
+ IETA |     5
+ IETA |     6
+
+(2 rows)
+
+9) SELECT * FROM teacher_name_id WHERE name='Catia Lola' and id > 1;
+
+ name       | id | email
+------------+----+-----------------
+ Catia Lola |  5 | {'catia@ua.pt'}
+
+(1 rows)
+
+10) SELECT * FROM student_course_containsname WHERE course='EI' AND name < 'Aluno 3';
+
+ course | name    | classes                     | id
+--------+---------+-----------------------------+----
+     EI | Aluno 1 | ['CBD', 'MPEI', 'SO', 'SM'] |  1
+     EI | Aluno 2 | ['CBD', 'MPEI', 'SO', 'RS'] |  2
+
+(2 rows)
+
+
+

@@ -1,0 +1,162 @@
+CREATE TABLE teacher_id (
+    id int,
+    name text, 
+    email set<text>,
+    Primary key(id)
+);
+
+CREATE TABLE teacher_name (
+    id int,
+    name text, 
+    email set<text>,
+    Primary key(name)
+);
+
+CREATE TABLE teacher_name_id (
+    id int,
+    name text, 
+    email set<text>,
+    Primary key((name), id)
+);
+
+CREATE TABLE student_id (
+    id int, 
+    name text,
+    course text,
+    classes list<text>,
+    Primary key(id)
+);
+
+CREATE TABLE student_name (
+    id int, 
+    name text,
+    course text,
+    classes list<text>,
+    Primary key(name)
+);
+
+CREATE TABLE student_course_containsName (
+    id int, 
+    name text,
+    course text,
+    classes list<text>,
+    Primary key((course), name)
+);
+
+CREATE TABLE classes (
+    id int,
+    pre_req map<text ,text>,
+    Primary key(id)
+);
+
+CREATE TABLE emp_by_dept (
+  empno int,
+  dept text,
+  PRIMARY KEY (dept,empno)
+) WITH CLUSTERING ORDER BY (empno ASC);
+
+INSERT INTO teacher_id(id, name, email) VALUES (1, 'Antonio Vilela', {'vilela@ua.pt' , 'luisvil@gmail.com'});
+INSERT INTO teacher_id(id, name, email) VALUES (2, 'Manuel Silva', {'silva@ua.pt' , 'silvas@gmail.com'});
+INSERT INTO teacher_id(id, name, email) VALUES (3, 'Luis Carlos', {'luis@ua.pt'});
+INSERT INTO teacher_id(id, name, email) VALUES (4, 'Luis Cachinho', {'cachinho@ua.pt'});
+INSERT INTO teacher_id(id, name, email) VALUES (5, 'Catia Lola', {'catia@ua.pt'});
+INSERT INTO teacher_id(id, name, email) VALUES (6, 'Maria Alberto', {'alberto@ua.pt', 'maria@gmail.com'});
+INSERT INTO teacher_id(id, name, email) VALUES (7, 'Joaquim Vilela', {'joaquim@ua.pt'});
+INSERT INTO teacher_id(id, name, email) VALUES (8, 'Amador Silva', {'amador@ua.pt'});
+INSERT INTO teacher_id(id, name, email) VALUES (9, 'Daniel Lopes', {'daniel@ua.pt', 'dani@gmail.com'});
+INSERT INTO teacher_id(id, name, email) VALUES (10, 'Pedro Sobral', {'sobral@ua.pt' , 'sobral@gmail.com'});
+INSERT INTO teacher_id(id, name, email) VALUES (11, 'Professor Prof', {'prof@ua.pt', 'professor@gmail.com'});
+INSERT INTO teacher_id(id, name, email) VALUES (12, 'Jose Silva', {'jose@ua.pt'});
+
+INSERT INTO teacher_name(id, name, email) VALUES (1, 'Antonio Vilela', {'vilela@ua.pt' , 'luisvil@gmail.com'});
+INSERT INTO teacher_name(id, name, email) VALUES (2, 'Manuel Silva', {'silva@ua.pt' , 'silvas@gmail.com'});
+INSERT INTO teacher_name(id, name, email) VALUES (3, 'Luis Carlos', {'luis@ua.pt'});
+INSERT INTO teacher_name(id, name, email) VALUES (4, 'Luis Cachinho', {'cachinho@ua.pt'});
+INSERT INTO teacher_name(id, name, email) VALUES (5, 'Catia Lola', {'catia@ua.pt'});
+INSERT INTO teacher_name(id, name, email) VALUES (6, 'Maria Alberto', {'alberto@ua.pt', 'maria@gmail.com'});
+INSERT INTO teacher_name(id, name, email) VALUES (7, 'Joaquim Vilela', {'joaquim@ua.pt'});
+INSERT INTO teacher_name(id, name, email) VALUES (8, 'Amador Silva', {'amador@ua.pt'});
+INSERT INTO teacher_name(id, name, email) VALUES (9, 'Daniel Lopes', {'daniel@ua.pt', 'dani@gmail.com'});
+INSERT INTO teacher_name(id, name, email) VALUES (10, 'Pedro Sobral', {'sobral@ua.pt' , 'sobral@gmail.com'});
+INSERT INTO teacher_name(id, name, email) VALUES (11, 'Professor Prof', {'prof@ua.pt', 'professor@gmail.com'});
+INSERT INTO teacher_name(id, name, email) VALUES (12, 'Jose Silva', {'jose@ua.pt'});
+
+INSERT INTO teacher_name_id(id, name, email) VALUES (1, 'Antonio Vilela', {'vilela@ua.pt' , 'luisvil@gmail.com'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (2, 'Manuel Silva', {'silva@ua.pt' , 'silvas@gmail.com'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (3, 'Luis Carlos', {'luis@ua.pt'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (4, 'Luis Cachinho', {'cachinho@ua.pt'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (5, 'Catia Lola', {'catia@ua.pt'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (6, 'Maria Alberto', {'alberto@ua.pt', 'maria@gmail.com'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (7, 'Joaquim Vilela', {'joaquim@ua.pt'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (8, 'Amador Silva', {'amador@ua.pt'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (9, 'Daniel Lopes', {'daniel@ua.pt', 'dani@gmail.com'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (10, 'Pedro Sobral', {'sobral@ua.pt' , 'sobral@gmail.com'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (11, 'Professor Prof', {'prof@ua.pt', 'professor@gmail.com'});
+INSERT INTO teacher_name_id(id, name, email) VALUES (12, 'Jose Silva', {'jose@ua.pt'});
+
+INSERT INTO student_id(id , name , course, classes) VALUES (1, 'Aluno 1', 'EI', ['CBD','MPEI','SO','SM']);
+INSERT INTO student_id(id , name , course, classes) VALUES (2, 'Aluno 2', 'EI', ['CBD','MPEI','SO','RS']);
+INSERT INTO student_id(id , name , course, classes) VALUES (3, 'Aluno 3', 'EI', ['CBD','BD','TPW','SM']);
+INSERT INTO student_id(id , name , course, classes) VALUES (4, 'Aluno 4', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_id(id , name , course, classes) VALUES (5, 'Aluno 5', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_id(id , name , course, classes) VALUES (6, 'Aluno 6', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_id(id , name , course, classes) VALUES (7, 'Aluno 7', 'CT', ['SIO','MPEI','IA','LABI']);
+INSERT INTO student_id(id , name , course, classes) VALUES (8, 'Aluno 8', 'CT', ['SIO','MPEI','IA','SO']);
+INSERT INTO student_id(id , name , course, classes) VALUES (9, 'Aluno 9', 'CT', ['SIO','MPEI','SO','LABI']);
+INSERT INTO student_id(id , name , course, classes) VALUES (10, 'Aluno 10', 'Civil', ['Desenho','Construção','C1','C2']);
+INSERT INTO student_id(id , name , course, classes) VALUES (11, 'Aluno 11', 'Civil', ['Desenho','Construção','C1','C2']);
+INSERT INTO student_id(id , name , course, classes) VALUES (12, 'Aluno 12', 'Civil', ['Desenho','Construção','C1','C2']);
+
+INSERT INTO student_name(id , name , course, classes) VALUES (1, 'Aluno 1', 'EI', ['CBD','MPEI','SO','SM']);
+INSERT INTO student_name(id , name , course, classes) VALUES (2, 'Aluno 2', 'EI', ['CBD','MPEI','SO','RS']);
+INSERT INTO student_name(id , name , course, classes) VALUES (3, 'Aluno 3', 'EI', ['CBD','BD','TPW','SM']);
+INSERT INTO student_name(id , name , course, classes) VALUES (4, 'Aluno 4', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_name(id , name , course, classes) VALUES (5, 'Aluno 5', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_name(id , name , course, classes) VALUES (6, 'Aluno 6', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_name(id , name , course, classes) VALUES (7, 'Aluno 7', 'CT', ['SIO','MPEI','IA','LABI']);
+INSERT INTO student_name(id , name , course, classes) VALUES (8, 'Aluno 8', 'CT', ['SIO','MPEI','IA','SO']);
+INSERT INTO student_name(id , name , course, classes) VALUES (9, 'Aluno 9', 'CT', ['SIO','MPEI','SO','LABI']);
+INSERT INTO student_name(id , name , course, classes) VALUES (10, 'Aluno 10', 'Civil', ['Desenho','Construção','C1','C2']);
+INSERT INTO student_name(id , name , course, classes) VALUES (11, 'Aluno 11', 'Civil', ['Desenho','Construção','C1','C2']);
+INSERT INTO student_name(id , name , course, classes) VALUES (12, 'Aluno 12', 'Civil', ['Desenho','Construção','C1','C2']);
+
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (1, 'Aluno 1', 'EI', ['CBD','MPEI','SO','SM']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (2, 'Aluno 2', 'EI', ['CBD','MPEI','SO','RS']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (3, 'Aluno 3', 'EI', ['CBD','BD','TPW','SM']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (4, 'Aluno 4', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (5, 'Aluno 5', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (6, 'Aluno 6', 'EGI', ['FP','Facil','EI','MS']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (7, 'Aluno 7', 'CT', ['SIO','MPEI','IA','LABI']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (8, 'Aluno 8', 'CT', ['SIO','MPEI','IA','SO']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (9, 'Aluno 9', 'CT', ['SIO','MPEI','SO','LABI']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (10, 'Aluno 10', 'Civil', ['Desenho','Construção','C1','C2']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (11, 'Aluno 11', 'Civil', ['Desenho','Construção','C1','C2']);
+INSERT INTO student_course_containsName(id , name , course, classes) VALUES (12, 'Aluno 12', 'Civil', ['Desenho','Construção','C1','C2']);
+
+INSERT INTO classes(id, pre_req) VALUES (1, {'CBD':'BD', 'SO': 'Bash'});
+INSERT INTO classes(id, pre_req) VALUES (2, {'CBD':'BD','MPEI': 'Matlab'});
+INSERT INTO classes(id, pre_req) VALUES (3, {'RS': 'Redes', 'TPW': 'Django, Angular'});
+INSERT INTO classes(id, pre_req) VALUES (4, {'FP': 'Python', 'EI': 'Industrias'});
+INSERT INTO classes(id, pre_req) VALUES (5, {'SIO': 'Hacks', 'LABI': 'P1'});
+INSERT INTO classes(id, pre_req) VALUES (6, {'IA': 'Pensamento de Robo'});
+INSERT INTO classes(id, pre_req) VALUES (7, {'Desenho': 'Desenhar', 'Construção': 'Martelar'});
+INSERT INTO classes(id, pre_req) VALUES (8, {'C1':'Calculos basicos', 'C2': 'Estudar'});
+
+INSERT INTO emp_by_dept(empno, dept) VALUES (1, 'IT');
+INSERT INTO emp_by_dept(empno, dept) VALUES (2, 'IT');
+INSERT INTO emp_by_dept(empno, dept) VALUES (3, 'IT');
+INSERT INTO emp_by_dept(empno, dept) VALUES (4, 'IT');
+INSERT INTO emp_by_dept(empno, dept) VALUES (5, 'IETA');
+INSERT INTO emp_by_dept(empno, dept) VALUES (6, 'IETA');
+INSERT INTO emp_by_dept(empno, dept) VALUES (7, 'IETA');
+INSERT INTO emp_by_dept(empno, dept) VALUES (8, 'IETA');
+INSERT INTO emp_by_dept(empno, dept) VALUES (9, 'DETI');
+INSERT INTO emp_by_dept(empno, dept) VALUES (10, 'CP');
+INSERT INTO emp_by_dept(empno, dept) VALUES (11, 'CP');
+INSERT INTO emp_by_dept(empno, dept) VALUES (12, 'CP');
+
+
+//Indexes
+CREATE INDEX get_preReq ON classes (ENTRIES(pre_req));
+CREATE INDEX ON student_id (classes) ;
+CREATE INDEX ON teacher_name(email);
