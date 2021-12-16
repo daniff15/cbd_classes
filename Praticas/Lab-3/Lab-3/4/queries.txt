@@ -73,6 +73,7 @@ SELECT * FROM emp_by_dept WHERE dept='IT';
 (1 rows)
 
 8) SELECT * FROM emp_by_dept WHERE dept='IETA' LIMIT 2;
+#Ordered by empno ASC
 
  dept | empno
 ------+-------
