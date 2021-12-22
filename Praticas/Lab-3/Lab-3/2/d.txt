@@ -20,6 +20,18 @@ SELECT tags FROM video_video WHERE id = 30864b60-562c-11ec-a36b-d9fa4527049e;
 (1 rows)
 
 3)
+SELECT video_id FROM tag_video  WHERE name = 'Aveiro';
+
+ video_id
+--------------------------------------
+ 219c0620-535d-11ec-a001-09297e8e3404
+ 30705260-562c-11ec-a36b-d9fa4527049e
+ 3074bf30-562c-11ec-a36b-d9fa4527049e
+ 29801ff1-5639-11ec-a36b-d9fa4527049e
+ 299814c1-5639-11ec-a36b-d9fa4527049e
+ 299f40b1-5639-11ec-a36b-d9fa4527049e
+
+(6 rows)
 
 4)
 SELECT * FROM evento WHERE user='zepedro@gmail.com' and video_id=3074bf30-562c-11ec-a36b-d9fa4527049e;
@@ -66,6 +78,7 @@ Não é possível devido ao mesmo problema da alínea 6
 Não é possível devido ao mesmo problema da alínea 6 e 9
 
 11) 
+Não é possível porque em Cassandra não é possivel fazer operacoes de agregação.
 
 
 

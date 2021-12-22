@@ -15,6 +15,13 @@ CREATE TABLE Video_author (
     PRIMARY KEY(author_email, upload_timestamp)
 );
 
+CREATE TABLE Tag_Video(
+   id uuid,
+   name text,
+   video_id uuid,
+   PRIMARY KEY(name, video_id, id)
+);
+
 CREATE TABLE Video_tags( 
     id uuid,  
     author_email text, 
@@ -106,6 +113,35 @@ INSERT INTO Video_author (id , author_email , name, description, tags, upload_ti
 INSERT INTO Video_author (id , author_email , name, description, tags, upload_timestamp) VALUES ( 219c0620-535d-11ec-a001-09297e8e3404, 'zepedro@gmail.com', 'Viver a life 3', 'Hoje fomos passear por Aveiro com a leonor e o daniel', {'Aveiro', 'Random'}, dateof(now()));
 INSERT INTO Video_author (id , author_email , name, description, tags, upload_timestamp) VALUES ( 3c8eacd0-535d-11ec-a001-09297e8e3404, 'andre@gmail.com', 'Challenge', 'Fui para um teste sem comer nada... Deu certo?', {'Universidade', 'Random'}, dateof(now()));
 INSERT INTO Video_author (id , author_email , name, description, tags, upload_timestamp) VALUES ( 30864b60-562c-11ec-a36b-d9fa4527049e, 'eva@gmail.com', 'Estou com medo', 'Faltei a uma aula da Universidade, será que vou chumbar', {'Universidade', 'Terror' , 'Random'}, dateof(now()));
+
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Enfermagem', 30781a90-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Random', 30781a90-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Animais', 307b00c0-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'PetCare', 307b00c0-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Atletismo', 62ddcdd0-535d-11ec-a001-09297e8e3404);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Carros', 2993f611-5639-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Aveiro', 299814c1-5639-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Random', 299814c1-5639-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Animais', 307163d0-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Random', 307163d0-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Terror', 307163d0-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Aveiro', 3074bf30-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Carros', 3074bf30-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Rally', 3074bf30-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Aveiro', 299f40b1-5639-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Random', 299f40b1-5639-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Aveiro', 219c0620-535d-11ec-a001-09297e8e3404);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Random', 219c0620-535d-11ec-a001-09297e8e3404);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Random', 30864b60-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Terror', 30864b60-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Universidade', 30864b60-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Aveiro', 29801ff1-5639-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Coisas', 29801ff1-5639-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Top', 29801ff1-5639-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Aveiro', 30705260-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Rally', 30705260-562c-11ec-a36b-d9fa4527049e);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Random', 3c8eacd0-535d-11ec-a001-09297e8e3404);
+INSERT INTO Tag_Video (id, name, video_id) VALUES (now(), 'Universidade', 3c8eacd0-535d-11ec-a001-09297e8e3404);
 
 INSERT INTO Video_video (id , author_email , name, description, tags, upload_timestamp) VALUES ( 29801ff1-5639-11ec-a36b-d9fa4527049e, 'danifgrd8@gmail.com', 'Video da hora', 'Videos a cada hora', {'Aveiro', 'Top', 'Coisas'}, dateof(now()));
 INSERT INTO Video_video (id , author_email , name, description, tags, upload_timestamp) VALUES ( 30705260-562c-11ec-a36b-d9fa4527049e, 'danifgrd8@gmail.com', 'Rally', 'Rally Tascas em Aveiro', {'Aveiro', 'Rally'}, dateof(now()));
@@ -200,6 +236,6 @@ INSERT INTO Rating (id, video_id, value) VALUES (now(), 307b00c0-562c-11ec-a36b-
 
 
 
-#Used to put in diff json files: (*Inside cqlsh:cbd:lab3_2*)
+#Used to put in diff json files: (Inside cqlsh:cbd:lab3_2)
 # CAPTURE "path/name.json"
 # SELECT json * FROM tablename; 
