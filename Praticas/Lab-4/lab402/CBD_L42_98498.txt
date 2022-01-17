@@ -1,0 +1,4 @@
+// NMEC: 12345 
+#1
+match (atores)-[:DIRECTED]->(movie)<-[:ACTED_IN]-(atores)
+RETURN atores.name as ator, movie.title as filme 
