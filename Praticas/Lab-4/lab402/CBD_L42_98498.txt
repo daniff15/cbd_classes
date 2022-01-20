@@ -1,4 +1,64 @@
 // NMEC: 12345 
 #1
 match (atores)-[:DIRECTED]->(movie)<-[:ACTED_IN]-(atores)
-RETURN atores.name as ator, movie.title as filme 
+return atores.name as ator, movie.title as filme 
+
+#2
+match (atores)-[:ACTED_IN]->(movies) 
+where movies.released > 2005 
+return atores.name, movies.title
+
+#3
+match (n1)-[r]-(n2)
+with distinct n1,n2, count(r) as sstcount
+match (n1)-[r]-(n2)
+where sstcount>1
+return n1,r,n2
+
+#4
+match (p1:Person)-[:REVIEWED]->(movie:Movie)<-[:REVIEWED]-(p2:Person)
+where id(p1) < id(p2)
+return p1.name, p2.name, movie.title
+
+#5
+match (p1:Person)-[:ACTED_IN]->(movie:Movie)<-[:ACTED_IN]-(p2:Person)
+where id(p1) < id(p2)
+with p1, p2, count(*) as total_movies
+where total_movies > 1
+return p1.name, p2.name
+
+#6
+match (p:Person)-[:ACTED_IN]->(m:Movie)
+where m.title = "Apollo 13"
+with m, m.released-p.born as idade_pessoa
+return m.title, avg(idade_pessoa)
+
+#7
+match (actor)-[r:ACTED_IN]->(movie)
+with movie, avg(movie.released - actor.born) as idade_media
+where idade_media is not null
+return movie.title, idade_media
+order by idade_media desc
+limit 10
+
+#8
+MATCH (actor)-[r:ACTED_IN]->(movie)
+WITH movie, avg(movie.released-actor.born) as idade_media
+ORDER BY idade_media
+LIMIT 1
+MATCH (actor)-[r:ACTED_IN]->(target)
+RETURN movie, actor
+
+#9
+match (johnCusack: Person {name: 'John Cusack'}), 
+    (demiMoore: Person {name: 'Demi Moore'}),
+    p = shortestPath((johnCusack)-[*]-(demiMoore))
+return p
+
+#10
+match (keanu: Person {name: 'Keanu Reeves'}), 
+    (cruise: Person {name: 'Tom Cruise'}),
+    p = shortestPath((keanu)-[*]-(cruise))
+return length(p)
+order by length(p)
+limit 1
