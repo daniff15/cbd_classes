@@ -42,12 +42,12 @@ order by idade_media desc
 limit 10
 
 #8
-MATCH (actor)-[r:ACTED_IN]->(movie)
-WITH movie, avg(movie.released-actor.born) as idade_media
-ORDER BY idade_media
-LIMIT 1
-MATCH (actor)-[r:ACTED_IN]->(target)
-RETURN movie, actor
+match (actor)-[r:ACTED_IN]->(movie)
+with movie, avg(movie.released-actor.born) as idade_media
+order by idade_media
+limit 1
+match (actor)-[r:ACTED_IN]->(target)
+return movie, actor
 
 #9
 match (johnCusack: Person {name: 'John Cusack'}), 
@@ -61,4 +61,66 @@ match (keanu: Person {name: 'Keanu Reeves'}),
     p = shortestPath((keanu)-[*]-(cruise))
 return length(p)
 order by length(p)
+limit 1
+
+#11
+match path=shortestPath((p1:Person)-[*]-(p2:Person))
+where p1.name contains "Jim" and p2.name contains "Kevin"
+with p1, p2, length(path) as size
+order by size
+limit 1
+return size
+
+#12
+match path=shortestPath((p1:Person)-[*..2]-(p2:Person {name:"Jim Cash"}))
+where p1 <> p2
+return distinct p1.name
+
+#13
+match path = shortestPath((p1:Person)-[*]-(p2:Person{name: "Kevin Bacon"}))
+where id(p1) < id(p2)
+return p1.name, length(path) as length
+order by length DESC
+limit 1
+
+#14
+match path = shortestPath((p1:Person)-[*]-(p2:Person))
+where id(p1) < id(p2)
+return p1.name, length(path) as length
+order by length DESC
+limit 1
+
+#15
+match path = shortestPath((p1:Person)-[*]-(p2:Person))
+where id(p1) < id(p2)
+with length(path) as len_p
+return len_p, count(len_p)
+
+#16
+match path = shortestPath((p1:Person)-[:ACTED_IN*]-(p2:Person))
+where id(p1)<id(p2)
+WITH avg(length(path)) as avg_length, p1, p2
+return p1.name, p2.name, avg_length
+order by avg_length
+limit 10
+
+#17 See if we can connect "Keanu Reeves" and "Demi Moore", min and max of 3 and 5 hops, respectively
+MATCH path=(a:Person{name:"Keanu Reeves"})-[*3..5]-(b:Person{name:"Demi Moore"})
+RETURN path;
+
+#18 Check every movie related to "Keanu Reeves" with a minimum and maximum of 3 and 5 hops, respectively
+match (person{name: 'Keanu Reeves'})-[:ACTED_IN*3..5]-(movie:Movie)
+return distinct movie.title
+
+#19 Return name and birth year of everyone named Tom and was born after 1950
+match (person:Person)
+where person.name =~ 'Tom.*' and person.born > 1950
+return distinct person.name, person.born
+
+#20 Oldest person participating in a movie
+match (p1:Person)-[r:ACTED_IN]->(m:Movie)
+with p1, m, m.released-p1.born as idade
+where idade is not null
+return p1.name, idade
+order by idade DESC
 limit 1
